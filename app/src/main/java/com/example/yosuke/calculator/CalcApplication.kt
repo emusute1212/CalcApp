@@ -1,3 +1,3 @@
 package com.example.yosuke.calculator
 
-class Application
+class CalcApplication
