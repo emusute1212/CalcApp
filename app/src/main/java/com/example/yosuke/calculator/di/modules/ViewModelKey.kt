@@ -1,4 +1,4 @@
-package com.example.yosuke.calculator
+package com.example.yosuke.calculator.di.modules
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

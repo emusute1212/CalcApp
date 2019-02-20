@@ -1,4 +1,4 @@
-package com.example.yosuke.calculator.di
+package com.example.yosuke.calculator.di.modules
 
 import com.example.yosuke.calculator.CalcButtonFragment
 import dagger.Module
