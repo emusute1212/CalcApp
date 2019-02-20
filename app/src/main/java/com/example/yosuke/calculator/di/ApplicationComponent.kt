@@ -14,7 +14,8 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         MainActivityModule::class,
-        CalcButtonFragmentModule::class
+        CalcButtonFragmentModule::class,
+        ViewModelModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<CalcApplication> {
