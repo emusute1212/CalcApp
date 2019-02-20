@@ -7,6 +7,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class CalcButtonFragmentModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [CalcModule::class])
     abstract fun contributeCalcButtonFragment(): CalcButtonFragment
 }

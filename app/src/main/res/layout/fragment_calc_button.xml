@@ -2,7 +2,9 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/layout">
     <data>
-
+        <variable
+                name="viewModel"
+                type="com.example.yosuke.calculator.CalcViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
