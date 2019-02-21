@@ -5,13 +5,13 @@ import android.arch.lifecycle.ViewModel
 import javax.inject.Inject
 
 class CalcViewModel @Inject constructor() : ViewModel() {
-    val number = MutableLiveData<Double>().apply {
-        postValue(0.0)
-    }
+    val number = MutableLiveData<String>()
 
     fun onClickNumberButton(input: String) {
-        val checkNum: Double = (number.value.toString() + input).toDoubleOrNull() ?: return
+        //小数点が入力された時に、すでに少数になっているときは早期リターン
+        if (input == "." && number.value?.contains(".") == true) return
 
-        number.postValue(checkNum)
+        val tempNumber: String = (number.value ?: "") + input
+        number.postValue(tempNumber)
     }
 }
