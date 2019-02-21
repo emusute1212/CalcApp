@@ -15,7 +15,7 @@ class CalcButtonFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CalcViewModel::class.java)
+        val viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentCalcButtonBinding>(
             inflater,
             R.layout.fragment_calc_button,
