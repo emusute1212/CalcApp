@@ -1,6 +1,8 @@
 package com.example.yosuke.calculator.di
 
 import com.example.yosuke.calculator.CalcApplication
+import com.example.yosuke.calculator.di.modules.CalcButtonFragmentModule
+import com.example.yosuke.calculator.di.modules.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -12,7 +14,8 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         MainActivityModule::class,
-        CalcButtonFragmentModule::class
+        CalcButtonFragmentModule::class,
+        ViewModelModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<CalcApplication> {

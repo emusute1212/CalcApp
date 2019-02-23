@@ -2,7 +2,9 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/layout">
     <data>
-
+        <variable
+                name="viewModel"
+                type="com.example.yosuke.calculator.CalcViewModel"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:text="1"
                 android:id="@+id/one"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/one)}"
                 app:layout_constraintBottom_toTopOf="@+id/zero" app:layout_constraintEnd_toStartOf="@+id/two"
                 app:layout_constraintStart_toStartOf="@+id/four"
                 app:layout_constraintTop_toBottomOf="@+id/four"/>
@@ -37,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:text="2"
                 android:id="@+id/two"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/two)}"
                 app:layout_constraintEnd_toStartOf="@+id/three"
                 app:layout_constraintStart_toEndOf="@+id/one"
                 app:layout_constraintBottom_toBottomOf="@+id/one"
@@ -46,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:text="3"
                 android:id="@+id/three"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/three)}"
                 app:layout_constraintStart_toEndOf="@+id/two"
                 app:layout_constraintEnd_toEndOf="@+id/six"
                 app:layout_constraintBottom_toBottomOf="@+id/two" app:layout_constraintTop_toTopOf="@+id/two"/>
@@ -54,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:text="4"
                 android:id="@+id/four"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/four)}"
                 app:layout_constraintBottom_toTopOf="@+id/one" app:layout_constraintStart_toStartOf="@id/seven"
                 app:layout_constraintEnd_toStartOf="@+id/five"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -63,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:text="5"
                 android:id="@+id/five"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/five)}"
                 app:layout_constraintEnd_toStartOf="@+id/six"
                 app:layout_constraintStart_toEndOf="@+id/four"
                 app:layout_constraintBottom_toBottomOf="@+id/four"
@@ -72,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:text="6"
                 android:id="@+id/six"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/six)}"
                 app:layout_constraintStart_toEndOf="@+id/five" app:layout_constraintEnd_toEndOf="@+id/nine"
                 app:layout_constraintBottom_toBottomOf="@+id/five"
                 app:layout_constraintTop_toTopOf="@+id/five"/>
@@ -80,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:text="7"
                 android:id="@+id/seven"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/seven)}"
                 app:layout_constraintBottom_toTopOf="@+id/four"
                 app:layout_constraintEnd_toStartOf="@+id/eight"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
@@ -90,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:text="8"
                 android:id="@+id/eight"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/eight)}"
                 app:layout_constraintEnd_toStartOf="@+id/nine"
                 app:layout_constraintStart_toEndOf="@+id/seven"
                 app:layout_constraintTop_toTopOf="@+id/seven"
@@ -98,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="9"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/nine)}"
                 android:id="@+id/nine"
                 app:layout_constraintStart_toEndOf="@+id/eight"
                 app:layout_constraintEnd_toStartOf="@+id/recyclerView"
@@ -107,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:id="@+id/zero"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/zero)}"
                 app:layout_constraintEnd_toStartOf="@+id/dot"
                 app:layout_constraintStart_toStartOf="@+id/one"
                 app:layout_constraintHorizontal_chainStyle="packed" android:layout_marginBottom="8dp"
@@ -117,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:text="."
                 android:id="@+id/dot"
+                android:onClick="@{() -> viewModel.onClickNumberButton(@string/dot)}"
                 app:layout_constraintStart_toEndOf="@+id/zero" app:layout_constraintEnd_toEndOf="@+id/three"
                 app:layout_constraintBottom_toBottomOf="@+id/zero" app:layout_constraintTop_toTopOf="@+id/zero"/>
 
