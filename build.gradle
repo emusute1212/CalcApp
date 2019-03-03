@@ -6,6 +6,7 @@ project.ext.set("targetSdkVersion", 28)
 project.ext.set("dagger2Version", "2.16")
 project.ext.set("kotlinCoroutineVersion", "1.1.0")
 project.ext.set("architectureComponentsVersion", "1.1.1")
+project.ext.set("stethoVersion", "1.5.0")
 
 buildscript {
     ext.kotlin_version = '1.3.11'
