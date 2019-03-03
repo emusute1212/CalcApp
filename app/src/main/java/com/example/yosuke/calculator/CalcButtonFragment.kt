@@ -3,19 +3,23 @@ package com.example.yosuke.calculator
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.yosuke.calculator.databinding.FragmentCalcButtonBinding
+import com.example.yosuke.calculator.view.SpecialButtonAdapter
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_calc_button.view.*
 import javax.inject.Inject
+
 
 class CalcButtonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    val viewModel by lazy { ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewModel = ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentCalcButtonBinding>(
             inflater,
             R.layout.fragment_calc_button,
@@ -23,6 +27,12 @@ class CalcButtonFragment : DaggerFragment() {
             false
         )
         binding.viewModel = viewModel
+        binding.root.special_button_recycler_view.apply {
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false).also {
+                layoutManager = it
+                adapter = SpecialButtonAdapter(viewModel)
+            }
+        }
         return binding.root
     }
 
