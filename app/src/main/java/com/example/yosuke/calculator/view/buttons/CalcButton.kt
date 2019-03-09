@@ -1,8 +1,16 @@
 package com.example.yosuke.calculator.view.buttons
 
-import android.support.annotation.StringRes
+interface CalcButton
 
-interface CalcButton {
-    @get:StringRes
-    val stringRecourse: Int
+enum class Operators : CalcButton {
+    PLUS,
+    MINUS,
+    TIMES,
+    DIVIDE;
+}
+
+enum class Specials : CalcButton {
+    CLEAR,
+    SWITCH,
+    PERCENT;
 }
