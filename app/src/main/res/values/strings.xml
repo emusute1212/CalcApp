@@ -25,4 +25,5 @@
     <string name="minus">-</string>
     <string name="times">×</string>
     <string name="divide">÷</string>
+    <string name="equal">=</string>
 </resources>

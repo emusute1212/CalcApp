@@ -35,6 +35,7 @@ class CalcViewModel @Inject constructor() : ViewModel() {
             Operators.MINUS -> R.string.minus
             Operators.TIMES -> R.string.times
             Operators.DIVIDE -> R.string.divide
+            Operators.EQUAL -> R.string.equal
             else -> -1
         }
     }

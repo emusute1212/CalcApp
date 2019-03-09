@@ -6,7 +6,8 @@ enum class Operators : CalcButton {
     PLUS,
     MINUS,
     TIMES,
-    DIVIDE;
+    DIVIDE,
+    EQUAL;
 }
 
 enum class Specials : CalcButton {
