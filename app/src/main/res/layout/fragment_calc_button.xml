@@ -20,12 +20,12 @@
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_chainStyle="packed"/>
         <android.support.v7.widget.RecyclerView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/zero"
-                app:layout_constraintTop_toTopOf="@+id/seven"
+                app:layout_constraintTop_toTopOf="@+id/special_button_recycler_view"
                 android:id="@+id/operator_button_recycler_view"
-                app:layout_constraintStart_toEndOf="@+id/six"/>
+                app:layout_constraintStart_toEndOf="@+id/six" android:layout_marginTop="8dp"/>
 
         <Button
                 android:layout_height="wrap_content"
