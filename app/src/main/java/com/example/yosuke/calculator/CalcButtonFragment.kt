@@ -1,5 +1,6 @@
 package com.example.yosuke.calculator
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -18,6 +19,7 @@ class CalcButtonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     val viewModel by lazy { ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java) }
+    val adapter by lazy { SpecialButtonAdapter(viewModel) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentCalcButtonBinding>(
@@ -30,9 +32,12 @@ class CalcButtonFragment : DaggerFragment() {
         binding.root.special_button_recycler_view.apply {
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false).also {
                 layoutManager = it
-                adapter = SpecialButtonAdapter(viewModel)
+                adapter = this@CalcButtonFragment.adapter
             }
         }
+        viewModel.number.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
         return binding.root
     }
 
