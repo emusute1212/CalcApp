@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import android.view.ViewGroup
 import com.example.yosuke.calculator.databinding.FragmentCalcButtonBinding
 import com.example.yosuke.calculator.view.OperatorButtonAdapter
 import com.example.yosuke.calculator.view.SpecialButtonAdapter
+import com.example.yosuke.calculator.view.buttons.Operators
+import com.example.yosuke.calculator.view.buttons.Specials
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_calc_button.view.*
 import javax.inject.Inject
@@ -50,14 +53,14 @@ class CalcButtonFragment : DaggerFragment() {
     }
 
     private fun setupSpecialButtonAdapter(recyclerView: RecyclerView, adapter: SpecialButtonAdapter) {
-        LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false).also {
+        GridLayoutManager(requireContext(), Specials.values().size, LinearLayoutManager.VERTICAL, false).also {
             recyclerView.layoutManager = it
             recyclerView.adapter = adapter
         }
     }
 
     private fun setupOperatorButtonAdapter(recyclerView: RecyclerView, adapter: OperatorButtonAdapter) {
-        LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false).also {
+        GridLayoutManager(requireContext(), Operators.values().size, LinearLayoutManager.HORIZONTAL, false).also {
             recyclerView.layoutManager = it
             recyclerView.adapter = adapter
         }
