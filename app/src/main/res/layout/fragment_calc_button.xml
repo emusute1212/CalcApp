@@ -15,6 +15,7 @@
                 app:layout_constraintStart_toStartOf="@+id/seven"
                 app:layout_constraintEnd_toStartOf="@+id/operator_button_recycler_view"
                 android:id="@+id/special_button_recycler_view"
+                android:overScrollMode="never"
                 app:layout_constraintBottom_toTopOf="@+id/seven"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_chainStyle="packed"
         />
@@ -25,6 +26,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/zero"
                 app:layout_constraintTop_toTopOf="@+id/special_button_recycler_view"
                 android:id="@+id/operator_button_recycler_view"
+                android:overScrollMode="never"
                 app:layout_constraintStart_toEndOf="@+id/six"
                 app:layout_constraintVertical_bias="0.0"/>
 
