@@ -10,21 +10,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/recyclerView" android:id="@+id/recyclerView2"
+                app:layout_constraintStart_toStartOf="@+id/seven"
+                app:layout_constraintEnd_toStartOf="@+id/operator_button_recycler_view"
+                android:id="@+id/special_button_recycler_view"
+                android:overScrollMode="never"
                 app:layout_constraintBottom_toTopOf="@+id/seven"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_chainStyle="packed"/>
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_chainStyle="packed"
+        />
         <android.support.v7.widget.RecyclerView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/zero"
-                app:layout_constraintTop_toTopOf="@+id/seven"
-                android:id="@+id/recyclerView"
-                app:layout_constraintStart_toEndOf="@+id/six"/>
+                app:layout_constraintTop_toTopOf="@+id/special_button_recycler_view"
+                android:id="@+id/operator_button_recycler_view"
+                android:overScrollMode="never"
+                app:layout_constraintStart_toEndOf="@+id/six"
+                app:layout_constraintVertical_bias="0.0"/>
 
         <Button
                 android:layout_height="wrap_content"
@@ -91,7 +95,7 @@
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/seven)}"
                 app:layout_constraintBottom_toTopOf="@+id/four"
                 app:layout_constraintEnd_toStartOf="@+id/eight"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
+                app:layout_constraintTop_toBottomOf="@+id/special_button_recycler_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed" android:layout_marginStart="8dp"/>
         <Button
@@ -111,7 +115,7 @@
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/nine)}"
                 android:id="@+id/nine"
                 app:layout_constraintStart_toEndOf="@+id/eight"
-                app:layout_constraintEnd_toStartOf="@+id/recyclerView"
+                app:layout_constraintEnd_toStartOf="@+id/operator_button_recycler_view"
                 app:layout_constraintBottom_toBottomOf="@+id/eight" app:layout_constraintTop_toTopOf="@+id/eight"/>
         <Button
                 android:layout_width="0dp"
