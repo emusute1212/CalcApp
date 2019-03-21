@@ -1,6 +1,6 @@
 package com.example.yosuke.calculator.di.modules
 
-import com.example.yosuke.calculator.MainActivity
+import com.example.yosuke.calculator.view.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

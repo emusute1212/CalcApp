@@ -3,7 +3,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.example.yosuke.calculator.CalcViewModel"/>
+                type="com.example.yosuke.calculator.viewmodel.CalcViewModel"/>
         <variable
                 name="buttonEntity"
                 type="com.example.yosuke.calculator.view.buttons.CalcButton"/>

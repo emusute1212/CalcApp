@@ -1,4 +1,4 @@
-package com.example.yosuke.calculator
+package com.example.yosuke.calculator.view
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,11 +10,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.ViewModelFactory
 import com.example.yosuke.calculator.databinding.FragmentCalcButtonBinding
-import com.example.yosuke.calculator.view.OperatorButtonAdapter
-import com.example.yosuke.calculator.view.SpecialButtonAdapter
-import com.example.yosuke.calculator.view.buttons.Operators
-import com.example.yosuke.calculator.view.buttons.Specials
+import com.example.yosuke.calculator.view.adapter.OperatorButtonAdapter
+import com.example.yosuke.calculator.view.adapter.SpecialButtonAdapter
+import com.example.yosuke.calculator.model.buttons.Operators
+import com.example.yosuke.calculator.model.buttons.Specials
+import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_calc_button.view.*
 import javax.inject.Inject

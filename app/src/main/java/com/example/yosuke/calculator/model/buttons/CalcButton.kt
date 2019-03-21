@@ -1,4 +1,4 @@
-package com.example.yosuke.calculator.view.buttons
+package com.example.yosuke.calculator.model.buttons
 
 interface CalcButton
 

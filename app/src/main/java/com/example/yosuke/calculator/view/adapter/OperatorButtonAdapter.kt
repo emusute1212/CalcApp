@@ -1,13 +1,13 @@
-package com.example.yosuke.calculator.view
+package com.example.yosuke.calculator.view.adapter
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.yosuke.calculator.CalcViewModel
+import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import com.example.yosuke.calculator.R
-import com.example.yosuke.calculator.view.buttons.Operators
+import com.example.yosuke.calculator.model.buttons.Operators
 
 class OperatorButtonAdapter(
     private val viewModel: CalcViewModel

@@ -1,11 +1,12 @@
-package com.example.yosuke.calculator
+package com.example.yosuke.calculator.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.StringRes
-import com.example.yosuke.calculator.view.buttons.CalcButton
-import com.example.yosuke.calculator.view.buttons.Operators
-import com.example.yosuke.calculator.view.buttons.Specials
+import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.model.buttons.CalcButton
+import com.example.yosuke.calculator.model.buttons.Operators
+import com.example.yosuke.calculator.model.buttons.Specials
 import javax.inject.Inject
 
 class CalcViewModel @Inject constructor() : ViewModel() {
