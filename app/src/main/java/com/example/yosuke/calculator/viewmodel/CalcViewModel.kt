@@ -4,9 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.StringRes
 import com.example.yosuke.calculator.R
-import com.example.yosuke.calculator.model.buttons.CalcButton
-import com.example.yosuke.calculator.model.buttons.Operators
-import com.example.yosuke.calculator.model.buttons.Specials
+import com.example.yosuke.calculator.model.elements.Controller
+import com.example.yosuke.calculator.model.elements.Operators
+import com.example.yosuke.calculator.model.elements.Specials
 import javax.inject.Inject
 
 class CalcViewModel @Inject constructor() : ViewModel() {
@@ -21,7 +21,7 @@ class CalcViewModel @Inject constructor() : ViewModel() {
     }
 
     @StringRes
-    fun getButtonTextRes(button: CalcButton): Int {
+    fun getButtonTextRes(button: Controller): Int {
         return when (button) {
             Specials.CLEAR -> {
                 if (number.value.isNullOrEmpty()) {

@@ -6,7 +6,7 @@
                 type="com.example.yosuke.calculator.viewmodel.CalcViewModel"/>
         <variable
                 name="buttonEntity"
-                type="com.example.yosuke.calculator.view.buttons.CalcButton"/>
+                type="com.example.yosuke.calculator.model.elements.Controller"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
