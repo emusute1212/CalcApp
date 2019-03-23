@@ -7,9 +7,12 @@ import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.model.elements.Controller
 import com.example.yosuke.calculator.model.elements.Operators
 import com.example.yosuke.calculator.model.elements.Specials
+import com.example.yosuke.calculator.model.usecase.CalcUseCase
 import javax.inject.Inject
 
-class CalcViewModel @Inject constructor() : ViewModel() {
+class CalcViewModel @Inject constructor(
+    private val useCase: CalcUseCase
+) : ViewModel() {
     val number = MutableLiveData<String>()
 
     fun onClickNumberButton(input: String) {
