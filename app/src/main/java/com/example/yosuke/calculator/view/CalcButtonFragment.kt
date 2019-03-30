@@ -15,8 +15,8 @@ import com.example.yosuke.calculator.ViewModelFactory
 import com.example.yosuke.calculator.databinding.FragmentCalcButtonBinding
 import com.example.yosuke.calculator.view.adapter.OperatorButtonAdapter
 import com.example.yosuke.calculator.view.adapter.SpecialButtonAdapter
-import com.example.yosuke.calculator.model.elements.Operators
-import com.example.yosuke.calculator.model.elements.Specials
+import com.example.yosuke.calculator.model.entity.Operators
+import com.example.yosuke.calculator.model.entity.Specials
 import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_calc_button.view.*

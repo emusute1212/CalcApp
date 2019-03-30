@@ -1,4 +1,4 @@
-package com.example.yosuke.calculator.model.elements
+package com.example.yosuke.calculator.model.entity
 
 interface Controller
 

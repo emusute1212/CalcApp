@@ -4,9 +4,9 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.support.annotation.StringRes
 import com.example.yosuke.calculator.R
-import com.example.yosuke.calculator.model.elements.Controller
-import com.example.yosuke.calculator.model.elements.Operators
-import com.example.yosuke.calculator.model.elements.Specials
+import com.example.yosuke.calculator.model.entity.Controller
+import com.example.yosuke.calculator.model.entity.Operators
+import com.example.yosuke.calculator.model.entity.Specials
 import com.example.yosuke.calculator.model.usecase.CalcUseCase
 import javax.inject.Inject
 

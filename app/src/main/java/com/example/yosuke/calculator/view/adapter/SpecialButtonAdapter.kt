@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import com.example.yosuke.calculator.R
-import com.example.yosuke.calculator.model.elements.Specials
+import com.example.yosuke.calculator.model.entity.Specials
 
 class SpecialButtonAdapter(
     private val viewModel: CalcViewModel
