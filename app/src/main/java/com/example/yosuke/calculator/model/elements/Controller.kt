@@ -10,6 +10,16 @@ enum class Operators : Controller {
     EQUAL;
 }
 
+fun Operators.toStr(): String {
+    return when (this) {
+        Operators.PLUS -> "+"
+        Operators.MINUS -> "-"
+        Operators.TIMES -> "×"
+        Operators.DIVIDE -> "÷"
+        Operators.EQUAL -> "="
+    }
+}
+
 enum class Specials : Controller {
     CLEAR,
     SWITCH,
