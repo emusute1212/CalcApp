@@ -14,11 +14,11 @@ class CalcViewModel @Inject constructor(
     private val useCase: CalcUseCase
 ) : ViewModel() {
     val number = MutableLiveData<String>()
-    val progressNumber = MutableLiveData<Long>()
+    val result = MutableLiveData<Long>()
     private val numberTypeOfLong: Long
         get() = number.value?.toLong() ?: 0
-    private val progressTypeOfLong: Long
-        get() = progressNumber.value?.toLong() ?: 0
+    private val resultTypeOfLong: Long
+        get() = result.value?.toLong() ?: 0
 
     fun onClickNumberButton(input: String) {
         //小数点が入力された時に、すでに少数になっているときは早期リターン
@@ -50,6 +50,6 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
-        useCase.calc(numberTypeOfLong, operators, progressTypeOfLong)
+        useCase.calc(numberTypeOfLong, operators, resultTypeOfLong)
     }
 }
