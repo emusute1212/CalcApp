@@ -2,8 +2,10 @@ package com.example.yosuke.calculator.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableArrayList
 import android.support.annotation.StringRes
 import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.model.entity.CalcEntity
 import com.example.yosuke.calculator.model.entity.Controller
 import com.example.yosuke.calculator.model.entity.Operators
 import com.example.yosuke.calculator.model.entity.Specials
@@ -15,6 +17,8 @@ class CalcViewModel @Inject constructor(
 ) : ViewModel() {
     val number = MutableLiveData<String>()
     val result = MutableLiveData<Long>()
+    val calcProgress = ObservableArrayList<CalcEntity>()
+    val lastCalcData: CalcEntity? = null
     private val numberTypeOfLong: Long
         get() = number.value?.toLong() ?: 0
     private val resultTypeOfLong: Long
