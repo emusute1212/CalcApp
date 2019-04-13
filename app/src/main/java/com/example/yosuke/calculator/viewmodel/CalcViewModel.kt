@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.support.annotation.StringRes
-import android.util.Log
 import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.model.entity.CalcEntity
 import com.example.yosuke.calculator.model.entity.Controller
@@ -17,7 +16,7 @@ class CalcViewModel @Inject constructor(
     private val useCase: CalcUseCase
 ) : ViewModel() {
     val number = MutableLiveData<String>()
-    val result = MutableLiveData<Double>()
+    val result = MutableLiveData<String>()
     val calcProgress = ObservableArrayList<CalcEntity>()
     private var lastCalcData: Pair<Operators?, Double?> = null to null
     private val numberTypeOfDouble: Double
@@ -61,13 +60,17 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
+        if (operators == Operators.EQUAL) {
+            inputEqual()
+            return
+        }
         //計算済みの時
         if (!isCalc) {
             calcProgress.add(CalcEntity(numberTypeOfDouble, operators))
             result.value = if (lastCalcData.first == null || lastCalcData.second == null) {
-                numberTypeOfDouble
+                number.value
             } else {
-                useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble)
+                useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble).toString()
             }
             lastCalcData = operators to numberTypeOfDouble
             number.value = null
@@ -76,5 +79,10 @@ class CalcViewModel @Inject constructor(
             calcProgress.last().operator = operators
             lastCalcData = operators to lastCalcData.second
         }
+    }
+
+    private fun inputEqual() {
+        result.value = useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble).toString()
+        number.value = result.value
     }
 }
