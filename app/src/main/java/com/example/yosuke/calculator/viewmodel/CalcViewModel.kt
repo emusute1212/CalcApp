@@ -17,13 +17,13 @@ class CalcViewModel @Inject constructor(
     private val useCase: CalcUseCase
 ) : ViewModel() {
     val number = MutableLiveData<String>()
-    val result = MutableLiveData<Long>()
+    val result = MutableLiveData<Double>()
     val calcProgress = ObservableArrayList<CalcEntity>()
-    private var lastCalcData: Pair<Operators?, Long?> = null to null
-    private val numberTypeOfLong: Long
-        get() = number.value?.toLong() ?: 0
-    private val resultTypeOfLong: Long
-        get() = result.value?.toLong() ?: 0
+    private var lastCalcData: Pair<Operators?, Double?> = null to null
+    private val numberTypeOfDouble: Double
+        get() = number.value?.toDouble() ?: 0.toDouble()
+    private val resultTypeOfDouble: Double
+        get() = result.value?.toDouble() ?: 0.toDouble()
     private var isCalc = false
 
     fun onClickNumberButton(input: String) {
@@ -65,13 +65,13 @@ class CalcViewModel @Inject constructor(
         Log.d("dasdjkl", lastCalcData.toString())
         //計算済みの時
         if (!isCalc) {
-            calcProgress.add(CalcEntity(numberTypeOfLong, operators))
+            calcProgress.add(CalcEntity(numberTypeOfDouble, operators))
             result.value = if (lastCalcData.first == null || lastCalcData.second == null) {
-                numberTypeOfLong
+                numberTypeOfDouble
             } else {
-                useCase.calc(resultTypeOfLong, lastCalcData.first!!, numberTypeOfLong)
+                useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble)
             }
-            lastCalcData = operators to numberTypeOfLong
+            lastCalcData = operators to numberTypeOfDouble
             number.value = null
             isCalc = true
         } else {
