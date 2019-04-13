@@ -61,8 +61,6 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
-        Log.d("dasdjkl", result.value.toString())
-        Log.d("dasdjkl", lastCalcData.toString())
         //計算済みの時
         if (!isCalc) {
             calcProgress.add(CalcEntity(numberTypeOfDouble, operators))
@@ -78,6 +76,5 @@ class CalcViewModel @Inject constructor(
             calcProgress.last().operator = operators
             lastCalcData = operators to lastCalcData.second
         }
-        Log.d("dakldj", result.value.toString())
     }
 }
