@@ -29,6 +29,10 @@ class CalcViewModel @Inject constructor(
     fun onClickNumberButton(input: String) {
         //小数点が入力された時に、すでに少数になっているときは早期リターン
         if (input == "." && number.value?.contains(".") == true) return
+        //初回に0を入力したときは早期リターン
+        if (input == "0" && number.value == null) return
+        //初回に.を入力したときは0を挿入する
+        if (input == "." && number.value.isNullOrEmpty()) number.value = "0"
 
         val tempNumber: String = (number.value ?: "") + input
         number.postValue(tempNumber)
