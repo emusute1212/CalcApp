@@ -10,6 +10,7 @@ import com.example.yosuke.calculator.model.entity.Controller
 import com.example.yosuke.calculator.model.entity.Operators
 import com.example.yosuke.calculator.model.entity.Specials
 import com.example.yosuke.calculator.model.usecase.CalcUseCase
+import java.math.BigDecimal
 import javax.inject.Inject
 
 class CalcViewModel @Inject constructor(
@@ -18,20 +19,22 @@ class CalcViewModel @Inject constructor(
     val number = MutableLiveData<String>()
     val result = MutableLiveData<String>()
     val calcProgress = ObservableArrayList<CalcEntity>()
-    private var lastCalcData: Pair<Operators?, Double?> = null to null
-    private val numberTypeOfDouble: Double
-        get() = number.value?.toDouble() ?: 0.toDouble()
-    private val resultTypeOfDouble: Double
-        get() = result.value?.toDouble() ?: 0.toDouble()
+    private var lastCalcData: Pair<Operators?, BigDecimal?> = null to null
+    private val numberTypeOfBigDecimal: BigDecimal
+        get() = number.value?.toBigDecimal() ?: 0.toBigDecimal()
+    private val resultTypeOfBigDecimal: BigDecimal
+        get() = result.value?.toBigDecimal() ?: 0.toBigDecimal()
     private var isCalc = false
 
     fun onClickNumberButton(input: String) {
+        if (isCalc) number.value = null
         //小数点が入力された時に、すでに少数になっているときは早期リターン
         if (input == "." && number.value?.contains(".") == true) return
         //初回に0を入力したときは早期リターン
         if (input == "0" && number.value == null) return
         //初回に.を入力したときは0を挿入する
         if (input == "." && number.value.isNullOrEmpty()) number.value = "0"
+
 
         val tempNumber: String = (number.value ?: "") + input
         number.postValue(tempNumber)
@@ -66,19 +69,20 @@ class CalcViewModel @Inject constructor(
         }
         //計算済みの時
         if (!isCalc) {
-            calcProgress.add(CalcEntity(numberTypeOfDouble, operators))
+            calcProgress.add(CalcEntity(numberTypeOfBigDecimal, operators))
             result.value = if (lastCalcData.first == null || lastCalcData.second == null) {
                 number.value
             } else {
-                useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble).toString()
+                useCase.calc(resultTypeOfBigDecimal, lastCalcData.first!!, numberTypeOfBigDecimal).toString()
             }
-            lastCalcData = operators to numberTypeOfDouble
+            lastCalcData = operators to numberTypeOfBigDecimal
             number.value = null
             isCalc = true
         } else {
             calcProgress.last().operator = operators
             lastCalcData = operators to lastCalcData.second
         }
+        number.value = result.value
     }
 
     private fun inputEqual() {

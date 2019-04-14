@@ -1,7 +1,8 @@
 package com.example.yosuke.calculator.model.usecase
 
 import com.example.yosuke.calculator.model.entity.Operators
+import java.math.BigDecimal
 
 interface CalcUseCase {
-    fun calc(x: Double, operator: Operators, y: Double): Double
+    fun calc(x: BigDecimal, operator: Operators, y: BigDecimal): BigDecimal
 }

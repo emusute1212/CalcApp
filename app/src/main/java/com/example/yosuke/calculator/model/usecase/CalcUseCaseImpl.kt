@@ -1,9 +1,10 @@
 package com.example.yosuke.calculator.model.usecase
 
 import com.example.yosuke.calculator.model.entity.Operators
+import java.math.BigDecimal
 
 class CalcUseCaseImpl : CalcUseCase {
-    override fun calc(x: Double, operator: Operators, y: Double): Double {
+    override fun calc(x: BigDecimal, operator: Operators, y: BigDecimal): BigDecimal {
         return when (operator) {
             Operators.PLUS -> x + y
             Operators.MINUS -> x - y
