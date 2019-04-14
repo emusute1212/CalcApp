@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.text.TextUtils"/>
+        <import type="java.util.stream.Collectors"/>
         <variable
                 name="viewModel"
                 type="com.example.yosuke.calculator.viewmodel.CalcViewModel"/>
@@ -16,6 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/calculating_elapsed"
+                android:showCalcList="@{viewModel.calcProgress}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
