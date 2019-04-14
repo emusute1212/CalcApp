@@ -16,29 +16,33 @@ import javax.inject.Inject
 class CalcViewModel @Inject constructor(
     private val useCase: CalcUseCase
 ) : ViewModel() {
-    val number = MutableLiveData<String>()
-    val result = MutableLiveData<String>()
     val calcProgress = ObservableArrayList<CalcEntity>()
-    private var lastCalcData: Pair<Operators?, BigDecimal?> = null to null
+    val number = MutableLiveData<String>()
+    private val inputNumber = MutableLiveData<String>()
+    private val result = MutableLiveData<String>()
+    private var lastOperator: Operators? = null
+    private var lastNumber: BigDecimal? = null
     private val numberTypeOfBigDecimal: BigDecimal
         get() = number.value?.toBigDecimal() ?: 0.toBigDecimal()
     private val resultTypeOfBigDecimal: BigDecimal
         get() = result.value?.toBigDecimal() ?: 0.toBigDecimal()
+    private val inputNumberTypeOfBigDecimal: BigDecimal
+        get() = inputNumber.value?.toBigDecimal() ?: 0.toBigDecimal()
     private var isCalc = false
 
     fun onClickNumberButton(input: String) {
-        if (isCalc) number.value = null
         //小数点が入力された時に、すでに少数になっているときは早期リターン
-        if (input == "." && number.value?.contains(".") == true) return
+        if (input == "." && inputNumber.value?.contains(".") == true) return
         //初回に0を入力したときは早期リターン
-        if (input == "0" && number.value == null) return
+        if (input == "0" && inputNumber.value == null) return
         //初回に.を入力したときは0を挿入する
-        if (input == "." && number.value.isNullOrEmpty()) number.value = "0"
+        if (input == "." && inputNumber.value.isNullOrEmpty()) number.value = "0"
 
 
-        val tempNumber: String = (number.value ?: "") + input
-        number.postValue(tempNumber)
+        val tempNumber: String = (inputNumber.value ?: "") + input
+        inputNumber.value = tempNumber
         isCalc = false
+        number.value = inputNumber.value
     }
 
     @StringRes
@@ -63,30 +67,33 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
-        if (operators == Operators.EQUAL) {
-            inputEqual()
-            return
-        }
         //計算済みの時
         if (!isCalc) {
-            calcProgress.add(CalcEntity(numberTypeOfBigDecimal, operators))
-            result.value = if (lastCalcData.first == null || lastCalcData.second == null) {
-                number.value
-            } else {
-                useCase.calc(resultTypeOfBigDecimal, lastCalcData.first!!, numberTypeOfBigDecimal).toString()
+            lastNumber = inputNumberTypeOfBigDecimal
+            if (operators == Operators.EQUAL) {
+                inputEqual()
+                return
             }
-            lastCalcData = operators to numberTypeOfBigDecimal
-            number.value = null
+            calcProgress.add(CalcEntity(inputNumberTypeOfBigDecimal, operators))
+            result.value = if (lastOperator == null) {
+                inputNumber.value
+            } else {
+                useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber))
+                    .toString()
+            }
+            lastOperator = operators
+            inputNumber.value = null
             isCalc = true
         } else {
             calcProgress.last().operator = operators
-            lastCalcData = operators to lastCalcData.second
+            lastOperator = operators
         }
         number.value = result.value
     }
 
     private fun inputEqual() {
-        result.value = useCase.calc(resultTypeOfDouble, lastCalcData.first!!, numberTypeOfDouble).toString()
+        result.value =
+            useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber)).toString()
         number.value = result.value
     }
 }
