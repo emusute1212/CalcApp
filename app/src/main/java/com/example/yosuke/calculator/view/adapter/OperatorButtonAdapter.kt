@@ -1,13 +1,13 @@
-package com.example.yosuke.calculator.view
+package com.example.yosuke.calculator.view.adapter
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.yosuke.calculator.CalcViewModel
 import com.example.yosuke.calculator.R
-import com.example.yosuke.calculator.view.buttons.Operators
+import com.example.yosuke.calculator.model.entity.Operators
+import com.example.yosuke.calculator.viewmodel.CalcViewModel
 
 class OperatorButtonAdapter(
     private val viewModel: CalcViewModel
@@ -17,8 +17,12 @@ class OperatorButtonAdapter(
 
     override fun onBindViewHolder(holder: OperatorButtonViewHolder, position: Int) {
         if (holder.binding == null) return
+        val operator = Operators.values()[position]
         holder.binding.viewModel = viewModel
-        holder.binding.buttonEntity = Operators.values()[position]
+        holder.binding.buttonEntity = operator
+        holder.binding.button.setOnClickListener {
+            viewModel.onClickOperatorButton(operator)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OperatorButtonViewHolder {

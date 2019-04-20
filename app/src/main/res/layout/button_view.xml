@@ -3,10 +3,10 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.example.yosuke.calculator.CalcViewModel"/>
+                type="com.example.yosuke.calculator.viewmodel.CalcViewModel"/>
         <variable
                 name="buttonEntity"
-                type="com.example.yosuke.calculator.view.buttons.CalcButton"/>
+                type="com.example.yosuke.calculator.model.entity.Controller"/>
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
@@ -14,6 +14,7 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/button"
                 android:setTextByRes="@{viewModel.getButtonTextRes(buttonEntity)}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
