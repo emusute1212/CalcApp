@@ -29,6 +29,7 @@ class CalcViewModel @Inject constructor(
     private val inputNumberTypeOfBigDecimal: BigDecimal
         get() = inputNumber.value?.toBigDecimal() ?: 0.toBigDecimal()
     private var isCalc = false
+    private var isFinish = false
 
     fun onClickNumberButton(input: String) {
         //小数点が入力された時に、すでに少数になっているときは早期リターン
@@ -37,6 +38,13 @@ class CalcViewModel @Inject constructor(
         if (input == "0" && inputNumber.value == null) return
         //初回に.を入力したときは0を挿入する
         if (input == "." && inputNumber.value.isNullOrEmpty()) number.value = "0"
+        if (isFinish) {
+            calcProgress.clear()
+            result.value = ""
+            isFinish = false
+            lastNumber = null
+            lastOperator = null
+        }
 
 
         val tempNumber: String = (inputNumber.value ?: "") + input
@@ -67,13 +75,13 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
+        if (operators == Operators.EQUAL) {
+            inputEqual()
+            return
+        }
         //計算済みの時
         if (!isCalc) {
             lastNumber = inputNumberTypeOfBigDecimal
-            if (operators == Operators.EQUAL) {
-                inputEqual()
-                return
-            }
             calcProgress.add(CalcEntity(inputNumberTypeOfBigDecimal, operators))
             result.value = if (lastOperator == null) {
                 inputNumber.value
@@ -92,8 +100,13 @@ class CalcViewModel @Inject constructor(
     }
 
     private fun inputEqual() {
+        if (!isFinish) {
+            lastNumber = inputNumberTypeOfBigDecimal
+        }
+        inputNumber.value = null
         result.value =
             useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber)).toString()
         number.value = result.value
+        isFinish = true
     }
 }
