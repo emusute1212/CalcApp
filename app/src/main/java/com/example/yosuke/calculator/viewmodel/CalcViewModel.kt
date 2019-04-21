@@ -30,6 +30,8 @@ class CalcViewModel @Inject constructor(
         get() = inputNumber.value?.toBigDecimal() ?: 0.toBigDecimal()
     private var isCalc = false
     private var isFinish = false
+    private val isAllClear
+        get() = number.value.isNullOrEmpty()
 
     fun onClickNumberButton(input: String) {
         //小数点が入力された時に、すでに少数になっているときは早期リターン
@@ -39,13 +41,8 @@ class CalcViewModel @Inject constructor(
         //初回に.を入力したときは0を挿入する
         if (input == "." && inputNumber.value.isNullOrEmpty()) number.value = "0"
         if (isFinish) {
-            calcProgress.clear()
-            result.value = ""
-            isFinish = false
-            lastNumber = null
-            lastOperator = null
+            allClear()
         }
-
 
         val tempNumber: String = (inputNumber.value ?: "") + input
         inputNumber.value = tempNumber
@@ -57,7 +54,7 @@ class CalcViewModel @Inject constructor(
     fun getButtonTextRes(button: Controller): Int {
         return when (button) {
             Specials.CLEAR -> {
-                if (number.value.isNullOrEmpty()) {
+                if (isAllClear) {
                     R.string.all_clear
                 } else {
                     R.string.clear
@@ -97,6 +94,30 @@ class CalcViewModel @Inject constructor(
             lastOperator = operators
         }
         number.value = result.value
+    }
+
+    fun onClickSpecialButton(special: Specials) {
+        when (special) {
+            Specials.CLEAR -> if (isAllClear) allClear() else clear()
+            Specials.PERCENT -> {
+            }
+            Specials.SWITCH -> {
+            }
+        }
+    }
+
+    private fun allClear() {
+        calcProgress.clear()
+        result.value = ""
+        number.value = ""
+        isFinish = false
+        lastNumber = null
+        lastOperator = null
+    }
+
+    private fun clear() {
+        number.value = ""
+        inputNumber.value = ""
     }
 
     private fun inputEqual() {
