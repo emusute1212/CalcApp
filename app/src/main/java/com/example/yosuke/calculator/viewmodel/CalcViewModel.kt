@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.support.annotation.StringRes
 import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.ext.percent
 import com.example.yosuke.calculator.model.entity.CalcEntity
 import com.example.yosuke.calculator.model.entity.Controller
 import com.example.yosuke.calculator.model.entity.Operators
@@ -99,8 +100,7 @@ class CalcViewModel @Inject constructor(
     fun onClickSpecialButton(special: Specials) {
         when (special) {
             Specials.CLEAR -> if (isAllClear) allClear() else clear()
-            Specials.PERCENT -> {
-            }
+            Specials.PERCENT -> percent()
             Specials.SWITCH -> {
             }
         }
@@ -118,6 +118,10 @@ class CalcViewModel @Inject constructor(
     private fun clear() {
         number.value = ""
         inputNumber.value = ""
+    }
+
+    private fun percent() {
+        inputNumber.value = resultTypeOfBigDecimal.percent(inputNumberTypeOfBigDecimal).toString()
     }
 
     private fun inputEqual() {
