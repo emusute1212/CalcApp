@@ -101,8 +101,7 @@ class CalcViewModel @Inject constructor(
         when (special) {
             Specials.CLEAR -> if (isAllClear) allClear() else clear()
             Specials.PERCENT -> percent()
-            Specials.SWITCH -> {
-            }
+            Specials.SWITCH -> minus()
         }
     }
 
@@ -122,6 +121,10 @@ class CalcViewModel @Inject constructor(
 
     private fun percent() {
         inputNumber.value = resultTypeOfBigDecimal.percent(inputNumberTypeOfBigDecimal).toString()
+    }
+
+    private fun minus() {
+        inputNumber.value = (inputNumberTypeOfBigDecimal * (-1).toBigDecimal()).toString()
     }
 
     private fun inputEqual() {
