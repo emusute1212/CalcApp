@@ -5,9 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.model.entity.Specials
+import com.example.yosuke.calculator.viewmodel.CalcViewModel
 
 class SpecialButtonAdapter(
     private val viewModel: CalcViewModel
@@ -17,8 +17,12 @@ class SpecialButtonAdapter(
 
     override fun onBindViewHolder(holder: SpecialButtonViewHolder, position: Int) {
         if (holder.binding == null) return
+        val special = Specials.values()[position]
         holder.binding.viewModel = viewModel
-        holder.binding.buttonEntity = Specials.values()[position]
+        holder.binding.buttonEntity = special
+        holder.binding.button.setOnClickListener {
+            viewModel.onClickSpecialButton(special)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialButtonViewHolder {
