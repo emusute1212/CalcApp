@@ -107,24 +107,26 @@ class CalcViewModel @Inject constructor(
 
     private fun allClear() {
         calcProgress.clear()
-        result.value = ""
-        number.value = ""
+        result.value = null
+        number.value = null
         isFinish = false
         lastNumber = null
         lastOperator = null
     }
 
     private fun clear() {
-        number.value = ""
-        inputNumber.value = ""
+        number.value = null
+        inputNumber.value = null
     }
 
     private fun percent() {
         inputNumber.value = resultTypeOfBigDecimal.percent(inputNumberTypeOfBigDecimal).toString()
+        number.value = inputNumber.value
     }
 
     private fun minus() {
         inputNumber.value = (inputNumberTypeOfBigDecimal * (-1).toBigDecimal()).toString()
+        number.value = inputNumber.value
     }
 
     private fun inputEqual() {
