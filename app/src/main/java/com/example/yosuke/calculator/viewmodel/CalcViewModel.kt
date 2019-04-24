@@ -35,12 +35,15 @@ class CalcViewModel @Inject constructor(
         get() = number.value.isNullOrEmpty()
 
     fun onClickNumberButton(input: String) {
+        if (number.value == ERROR) return
         //小数点が入力された時に、すでに少数になっているときは早期リターン
         if (input == "." && inputNumber.value?.contains(".") == true) return
         //初回に0を入力したときは早期リターン
         if (input == "0" && inputNumber.value == null) return
+        //入力値がMAX_INPUT_NUMBER_SIZEを超えていたときは早期リターン
+        if ((inputNumber.value?.replace(".", "")?.length ?: 0) >= MAX_INPUT_NUMBER_SIZE) return
         //初回に.を入力したときは0を挿入する
-        if (input == "." && inputNumber.value.isNullOrEmpty()) number.value = "0"
+        if (input == "." && inputNumber.value.isNullOrEmpty()) inputNumber.value = "0"
         if (isFinish) {
             allClear()
         }
@@ -73,6 +76,7 @@ class CalcViewModel @Inject constructor(
     }
 
     fun onClickOperatorButton(operators: Operators) {
+        if (number.value == ERROR) return
         if (operators == Operators.EQUAL) {
             inputEqual()
             return
@@ -120,11 +124,13 @@ class CalcViewModel @Inject constructor(
     }
 
     private fun percent() {
+        if (number.value == ERROR) return
         inputNumber.value = resultTypeOfBigDecimal.percent(inputNumberTypeOfBigDecimal).toString()
         number.value = inputNumber.value
     }
 
     private fun minus() {
+        if (number.value == ERROR) return
         inputNumber.value = (inputNumberTypeOfBigDecimal * (-1).toBigDecimal()).toString()
         number.value = inputNumber.value
     }
@@ -138,5 +144,10 @@ class CalcViewModel @Inject constructor(
             useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber)).toString()
         number.value = result.value
         isFinish = true
+    }
+
+    companion object {
+        private const val MAX_INPUT_NUMBER_SIZE: Int = 9
+        private const val ERROR = "エラー"
     }
 }
