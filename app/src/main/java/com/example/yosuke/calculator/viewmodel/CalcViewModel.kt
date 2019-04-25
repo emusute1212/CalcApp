@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.support.annotation.StringRes
+import android.util.Log
 import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.ext.percent
 import com.example.yosuke.calculator.model.entity.CalcEntity
@@ -39,7 +40,10 @@ class CalcViewModel @Inject constructor(
         //小数点が入力された時に、すでに少数になっているときは早期リターン
         if (input == "." && inputNumber.value?.contains(".") == true) return
         //初回に0を入力したときは早期リターン
-        if (input == "0" && inputNumber.value == null) return
+        if (input == "0" && inputNumber.value == null) {
+            number.value = "0"
+            return
+        }
         //入力値がMAX_INPUT_NUMBER_SIZEを超えていたときは早期リターン
         if ((inputNumber.value?.replace(".", "")?.length ?: 0) >= MAX_INPUT_NUMBER_SIZE) return
         //初回に.を入力したときは0を挿入する
@@ -88,8 +92,13 @@ class CalcViewModel @Inject constructor(
             result.value = if (lastOperator == null) {
                 inputNumber.value
             } else {
-                useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber))
-                    .toString()
+                try {
+                    useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber))
+                        .toString()
+                } catch (e: ArithmeticException) {
+                    Log.w(TAG, "error", e)
+                    ERROR
+                }
             }
             lastOperator = operators
             inputNumber.value = null
@@ -140,13 +149,23 @@ class CalcViewModel @Inject constructor(
             lastNumber = inputNumberTypeOfBigDecimal
         }
         inputNumber.value = null
-        result.value =
+        if (lastOperator == null) {
+            number.value = lastNumber!!.toString()
+            isFinish = true
+            return
+        }
+        result.value = try {
             useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber)).toString()
+        } catch (e: ArithmeticException) {
+            Log.w(TAG, "error", e)
+            ERROR
+        }
         number.value = result.value
         isFinish = true
     }
 
     companion object {
+        private val TAG = CalcViewModel::class.java.simpleName
         private const val MAX_INPUT_NUMBER_SIZE: Int = 9
         private const val ERROR = "エラー"
     }
