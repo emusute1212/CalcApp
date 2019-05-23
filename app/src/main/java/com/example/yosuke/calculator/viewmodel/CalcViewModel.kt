@@ -3,6 +3,7 @@ package com.example.yosuke.calculator.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
+import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.util.Log
 import com.example.yosuke.calculator.R
@@ -58,23 +59,23 @@ class CalcViewModel @Inject constructor(
         number.value = inputNumber.value
     }
 
-    @StringRes
-    fun getButtonTextRes(button: Controller): Int {
+    @DrawableRes
+    fun getButtonImageRes(button: Controller): Int {
         return when (button) {
             Specials.CLEAR -> {
                 if (isAllClear) {
-                    R.string.all_clear
+                    R.drawable.all_clear
                 } else {
-                    R.string.clear
+                    R.drawable.clear
                 }
             }
-            Specials.PERCENT -> R.string.percent
-            Specials.SWITCH -> R.string.plus_minus_switch
-            Operators.PLUS -> R.string.plus
-            Operators.MINUS -> R.string.minus
-            Operators.TIMES -> R.string.times
-            Operators.DIVIDE -> R.string.divide
-            Operators.EQUAL -> R.string.equal
+            Specials.PERCENT -> R.drawable.percent
+            Specials.SWITCH -> R.drawable.plus_minus_switch
+            Operators.PLUS -> R.drawable.plus
+            Operators.MINUS -> R.drawable.minus
+            Operators.TIMES -> R.drawable.times
+            Operators.DIVIDE -> R.drawable.divide
+            Operators.EQUAL -> R.drawable.equal
             else -> -1
         }
     }

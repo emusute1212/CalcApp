@@ -30,109 +30,120 @@
                 app:layout_constraintStart_toEndOf="@+id/six"
                 app:layout_constraintVertical_bias="0.0"/>
 
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="1"
                 android:id="@+id/one"
+                android:src="@drawable/one"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/one)}"
                 app:layout_constraintBottom_toTopOf="@+id/zero" app:layout_constraintEnd_toStartOf="@+id/two"
                 app:layout_constraintStart_toStartOf="@+id/four"
                 app:layout_constraintTop_toBottomOf="@+id/four"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="2"
                 android:id="@+id/two"
+                android:src="@drawable/two"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/two)}"
                 app:layout_constraintEnd_toStartOf="@+id/three"
                 app:layout_constraintStart_toEndOf="@+id/one"
                 app:layout_constraintBottom_toBottomOf="@+id/one"
                 app:layout_constraintTop_toTopOf="@+id/one"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="3"
                 android:id="@+id/three"
+                android:src="@drawable/three"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/three)}"
                 app:layout_constraintStart_toEndOf="@+id/two"
                 app:layout_constraintEnd_toEndOf="@+id/six"
                 app:layout_constraintBottom_toBottomOf="@+id/two" app:layout_constraintTop_toTopOf="@+id/two"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="4"
                 android:id="@+id/four"
+                android:src="@drawable/four"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/four)}"
                 app:layout_constraintBottom_toTopOf="@+id/one" app:layout_constraintStart_toStartOf="@id/seven"
                 app:layout_constraintEnd_toStartOf="@+id/five"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toBottomOf="@+id/seven"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="5"
                 android:id="@+id/five"
+                android:src="@drawable/five"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/five)}"
                 app:layout_constraintEnd_toStartOf="@+id/six"
                 app:layout_constraintStart_toEndOf="@+id/four"
                 app:layout_constraintBottom_toBottomOf="@+id/four"
                 app:layout_constraintTop_toTopOf="@+id/four"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="6"
                 android:id="@+id/six"
+                android:src="@drawable/six"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/six)}"
                 app:layout_constraintStart_toEndOf="@+id/five" app:layout_constraintEnd_toEndOf="@+id/nine"
                 app:layout_constraintBottom_toBottomOf="@+id/five"
                 app:layout_constraintTop_toTopOf="@+id/five"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="7"
                 android:id="@+id/seven"
+                android:src="@drawable/seven"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/seven)}"
                 app:layout_constraintBottom_toTopOf="@+id/four"
                 app:layout_constraintEnd_toStartOf="@+id/eight"
                 app:layout_constraintTop_toBottomOf="@+id/special_button_recycler_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed" android:layout_marginStart="8dp"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="8"
                 android:id="@+id/eight"
+                android:src="@drawable/eight"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/eight)}"
                 app:layout_constraintEnd_toStartOf="@+id/nine"
                 app:layout_constraintStart_toEndOf="@+id/seven"
                 app:layout_constraintTop_toTopOf="@+id/seven"
                 app:layout_constraintBottom_toBottomOf="@+id/seven"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="9"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/nine)}"
                 android:id="@+id/nine"
+                android:src="@drawable/nine"
                 app:layout_constraintStart_toEndOf="@+id/eight"
                 app:layout_constraintEnd_toStartOf="@+id/operator_button_recycler_view"
                 app:layout_constraintBottom_toBottomOf="@+id/eight" app:layout_constraintTop_toTopOf="@+id/eight"/>
-        <Button
-                android:layout_width="0dp"
+        <ImageButton
+                android:background="@null"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
                 android:id="@+id/zero"
+                android:src="@drawable/zero"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/zero)}"
                 app:layout_constraintEnd_toStartOf="@+id/dot"
                 app:layout_constraintStart_toStartOf="@+id/one"
                 app:layout_constraintHorizontal_chainStyle="packed" android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/one"/>
-        <Button
+        <ImageButton
+                android:background="@null"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="."
                 android:id="@+id/dot"
+                android:src="@drawable/dot"
                 android:onClick="@{() -> viewModel.onClickNumberButton(@string/dot)}"
                 app:layout_constraintStart_toEndOf="@+id/zero" app:layout_constraintEnd_toEndOf="@+id/three"
                 app:layout_constraintBottom_toBottomOf="@+id/zero" app:layout_constraintTop_toTopOf="@+id/zero"/>
