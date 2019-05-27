@@ -8,7 +8,8 @@
     </data>
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFF7F7F7">
         <android.support.v7.widget.RecyclerView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
