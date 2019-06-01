@@ -16,10 +16,10 @@
 
         <android.support.v7.widget.AppCompatTextView
                 android:layout_width="0dp"
-                android:layout_height="29dp"
+                android:layout_height="38dp"
                 android:id="@+id/calculating_elapsed"
                 android:setFont="@{`Roboto/Roboto-Light.ttf`}"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textColor="#FF5C5C5C"
                 android:autoSizeTextType="uniform"
                 android:showCalcList="@{viewModel.calcProgress}"
