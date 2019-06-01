@@ -28,7 +28,7 @@
                 app:layout_constraintVertical_chainStyle="packed" app:layout_constraintVertical_bias="1.0"
                 android:layout_marginEnd="13dp" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="13dp" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="1.0" android:gravity="right" tools:targetApi="p"/>
+                app:layout_constraintHorizontal_bias="1.0" android:gravity="right"/>
 
         <android.support.v7.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -43,7 +43,7 @@
                 android:layout_marginEnd="13dp"
                 android:layout_marginTop="12dp" app:layout_constraintBottom_toTopOf="@+id/button_area"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="13dp"
-                app:layout_constraintHorizontal_bias="1.0" android:gravity="right" tools:targetApi="p"/>
+                app:layout_constraintHorizontal_bias="1.0" android:gravity="right"/>
 
         <FrameLayout
                 android:layout_height="wrap_content"
