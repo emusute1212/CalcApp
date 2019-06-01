@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
 import android.util.Log
 import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.ext.percent
@@ -86,6 +85,7 @@ class CalcViewModel @Inject constructor(
             inputEqual()
             return
         }
+        isFinish = false
         //計算済みの時
         if (!isCalc) {
             lastNumber = inputNumberTypeOfBigDecimal
@@ -161,8 +161,10 @@ class CalcViewModel @Inject constructor(
             Log.w(TAG, "error", e)
             ERROR
         }
+        calcProgress.add(CalcEntity(requireNotNull(lastNumber), requireNotNull(lastOperator)))
         number.value = result.value
         isFinish = true
+        isCalc = true
     }
 
     companion object {
