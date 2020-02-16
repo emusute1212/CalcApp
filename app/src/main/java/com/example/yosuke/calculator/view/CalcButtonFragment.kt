@@ -13,10 +13,10 @@ import android.view.ViewGroup
 import com.example.yosuke.calculator.R
 import com.example.yosuke.calculator.ViewModelFactory
 import com.example.yosuke.calculator.databinding.FragmentCalcButtonBinding
-import com.example.yosuke.calculator.view.adapter.OperatorButtonAdapter
-import com.example.yosuke.calculator.view.adapter.SpecialButtonAdapter
 import com.example.yosuke.calculator.model.entity.Operators
 import com.example.yosuke.calculator.model.entity.Specials
+import com.example.yosuke.calculator.view.adapter.OperatorButtonAdapter
+import com.example.yosuke.calculator.view.adapter.SpecialButtonAdapter
 import com.example.yosuke.calculator.viewmodel.CalcViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_calc_button.view.*
@@ -26,9 +26,15 @@ import javax.inject.Inject
 class CalcButtonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    val viewModel by lazy { ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java) }
+    val viewModel by lazy {
+        ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java)
+    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = DataBindingUtil.inflate<FragmentCalcButtonBinding>(
             inflater,
             R.layout.fragment_calc_button,
@@ -55,15 +61,31 @@ class CalcButtonFragment : DaggerFragment() {
         })
     }
 
-    private fun setupSpecialButtonAdapter(recyclerView: RecyclerView, adapter: SpecialButtonAdapter) {
-        GridLayoutManager(requireContext(), Specials.values().size, LinearLayoutManager.VERTICAL, false).also {
+    private fun setupSpecialButtonAdapter(
+        recyclerView: RecyclerView,
+        adapter: SpecialButtonAdapter
+    ) {
+        GridLayoutManager(
+            requireContext(),
+            Specials.values().size,
+            LinearLayoutManager.VERTICAL,
+            false
+        ).also {
             recyclerView.layoutManager = it
             recyclerView.adapter = adapter
         }
     }
 
-    private fun setupOperatorButtonAdapter(recyclerView: RecyclerView, adapter: OperatorButtonAdapter) {
-        GridLayoutManager(requireContext(), Operators.values().size, LinearLayoutManager.HORIZONTAL, false).also {
+    private fun setupOperatorButtonAdapter(
+        recyclerView: RecyclerView,
+        adapter: OperatorButtonAdapter
+    ) {
+        GridLayoutManager(
+            requireContext(),
+            Operators.values().size,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        ).also {
             recyclerView.layoutManager = it
             recyclerView.adapter = adapter
         }

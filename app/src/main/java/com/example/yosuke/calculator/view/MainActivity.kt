@@ -20,7 +20,8 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CalcViewModel::class.java)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this,
+        DataBindingUtil.setContentView<ActivityMainBinding>(
+            this,
             R.layout.activity_main
         ).also { binding ->
             binding.viewModel = viewModel
@@ -29,7 +30,8 @@ class MainActivity : DaggerAppCompatActivity() {
         val fragment = CalcButtonFragment.newInstance()
 
         supportFragmentManager.beginTransaction().apply {
-            replace(button_area.id, fragment,
+            replace(
+                button_area.id, fragment,
                 CalcButtonFragment.FRAGMENT_TAG
             )
             commit()

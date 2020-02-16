@@ -94,7 +94,11 @@ class CalcViewModel @Inject constructor(
                 inputNumber.value
             } else {
                 try {
-                    useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber))
+                    useCase.calc(
+                        resultTypeOfBigDecimal,
+                        requireNotNull(lastOperator),
+                        requireNotNull(lastNumber)
+                    )
                         .toString()
                 } catch (e: ArithmeticException) {
                     Log.w(TAG, "error", e)
@@ -156,7 +160,11 @@ class CalcViewModel @Inject constructor(
             return
         }
         result.value = try {
-            useCase.calc(resultTypeOfBigDecimal, requireNotNull(lastOperator), requireNotNull(lastNumber)).toString()
+            useCase.calc(
+                resultTypeOfBigDecimal,
+                requireNotNull(lastOperator),
+                requireNotNull(lastNumber)
+            ).toString()
         } catch (e: ArithmeticException) {
             Log.w(TAG, "error", e)
             ERROR
