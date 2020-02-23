@@ -24,8 +24,6 @@ class CalcViewModel @Inject constructor(
     private val result = MutableLiveData<String>()
     private var lastOperator: Operators? = null
     private var lastNumber: BigDecimal? = null
-    private val numberTypeOfBigDecimal: BigDecimal
-        get() = number.value?.toBigDecimal() ?: 0.toBigDecimal()
     private val resultTypeOfBigDecimal: BigDecimal
         get() = result.value?.toBigDecimal() ?: 0.toBigDecimal()
     private val inputNumberTypeOfBigDecimal: BigDecimal
@@ -109,7 +107,11 @@ class CalcViewModel @Inject constructor(
             inputNumber.value = null
             isCalc = true
         } else {
-            calcProgress.last().operator = operators
+            calcProgress.last().let {
+                val new = CalcEntity(it.number, operators)
+                calcProgress.remove(calcProgress.last())
+                calcProgress.add(new)
+            }
             lastOperator = operators
         }
         number.value = result.value
