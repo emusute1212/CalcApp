@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.ext.setOnFeedbackClick
 import com.example.yosuke.calculator.model.entity.Specials
 import com.example.yosuke.calculator.viewmodel.CalcViewModel
 
@@ -20,7 +21,7 @@ class SpecialButtonAdapter(
         val special = Specials.values()[position]
         holder.binding.viewModel = viewModel
         holder.binding.buttonEntity = special
-        holder.binding.button.setOnClickListener {
+        holder.binding.button.setOnFeedbackClick {
             viewModel.onClickSpecialButton(special)
         }
     }

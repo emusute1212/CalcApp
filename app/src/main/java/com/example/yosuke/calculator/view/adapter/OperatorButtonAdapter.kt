@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.yosuke.calculator.R
+import com.example.yosuke.calculator.ext.setOnFeedbackClick
 import com.example.yosuke.calculator.model.entity.Operators
 import com.example.yosuke.calculator.viewmodel.CalcViewModel
 
@@ -20,7 +21,7 @@ class OperatorButtonAdapter(
         val operator = Operators.values()[position]
         holder.binding.viewModel = viewModel
         holder.binding.buttonEntity = operator
-        holder.binding.button.setOnClickListener {
+        holder.binding.button.setOnFeedbackClick {
             viewModel.onClickOperatorButton(operator)
         }
     }
