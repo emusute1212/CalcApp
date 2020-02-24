@@ -107,10 +107,12 @@ class CalcViewModel @Inject constructor(
             inputNumber.value = null
             isCalc = true
         } else {
-            calcProgress.last().let {
+            calcProgress.lastOrNull()?.also {
                 val new = CalcEntity(it.number, operators)
                 calcProgress.remove(calcProgress.last())
                 calcProgress.add(new)
+            } ?: run {
+                calcProgress.add(CalcEntity(BigDecimal.ZERO, operators))
             }
             lastOperator = operators
         }
