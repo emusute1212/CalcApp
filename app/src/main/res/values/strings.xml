@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">電卓</string>
 
     <!--ナンバー-->
     <string name="zero">0</string>
