@@ -7,7 +7,7 @@ android {
     compileSdkVersion project.compileSdkVersion
     buildToolsVersion project.buildToolsVersion
     defaultConfig {
-        applicationId "com.example.yosuke.calculator"
+        applicationId "io.github.emusute1212.calculator"
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode 1
