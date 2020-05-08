@@ -1,58 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="android.text.TextUtils"/>
-        <import type="java.util.stream.Collectors"/>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="java.util.stream.Collectors" />
+
         <variable
                 name="viewModel"
-                type="com.example.yosuke.calculator.viewmodel.CalcViewModel"/>
+                type="com.example.yosuke.calculator.viewmodel.CalcViewModel" />
     </data>
-    <android.support.constraint.ConstraintLayout
+
+    <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F0F0F0"
-            tools:context=".view.MainActivity">
+            android:fitsSystemWindows="true">
 
-        <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/calculating_elapsed"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="115dp"
-                android:layout_marginEnd="13dp"
-                android:autoSizeTextType="uniform"
-                android:gravity="right"
-                android:setFont="@{`Roboto/Roboto-Light.ttf`}" android:showCalcList="@{viewModel.calcProgress}"
-                android:textColor="@color/history_text"
-                android:textSize="30sp" app:layout_constraintBottom_toTopOf="@+id/result"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" app:layout_constraintVertical_chainStyle="packed" tools:targetApi="p"/>
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F0F0"
+                tools:context=".view.MainActivity">
 
-        <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/result"
-                android:layout_width="0dp"
-                android:layout_height="82dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="13dp"
-                android:autoSizeTextType="uniform"
-                android:gravity="right"
-                android:setFont="@{`Roboto/Roboto-Regular.ttf`}" android:setNumberText="@{viewModel.number ?? @string/zero}"
-                android:textColor="@color/input_text"
-                android:textSize="68sp" app:layout_constraintBottom_toTopOf="@+id/button_area"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/calculating_elapsed" tools:targetApi="p"/>
+            <ImageButton
+                    android:id="@+id/menu_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_menu_black_24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-                android:id="@+id/button_area"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/result"
-                app:layout_constraintVertical_bias="1.0"/>
-    </android.support.constraint.ConstraintLayout>
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/calculating_elapsed"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="115dp"
+                    android:layout_marginEnd="13dp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="right"
+                    android:setFont="@{`Roboto/Roboto-Light.ttf`}"
+                    android:showCalcList="@{viewModel.calcProgress}"
+                    android:textColor="@color/history_text"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toTopOf="@+id/result"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:targetApi="p" />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/result"
+                    android:layout_width="0dp"
+                    android:layout_height="82dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="13dp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="right"
+                    android:setFont="@{`Roboto/Roboto-Regular.ttf`}"
+                    android:setNumberText="@{viewModel.number ?? @string/zero}"
+                    android:textColor="@color/input_text"
+                    android:textSize="68sp"
+                    app:layout_constraintBottom_toTopOf="@+id/button_area"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calculating_elapsed"
+                    tools:targetApi="p" />
+
+            <FrameLayout
+                    android:id="@+id/button_area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/result"
+                    app:layout_constraintVertical_bias="1.0" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.design.widget.NavigationView
+                android:id="@+id/navigation_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/drawer_header"
+                app:menu="@menu/drawer" />
+    </android.support.v4.widget.DrawerLayout>
 </layout>
