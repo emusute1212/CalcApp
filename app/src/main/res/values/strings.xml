@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">電卓</string>
 
     <!--ナンバー-->
     <string name="zero">0</string>
@@ -26,4 +26,5 @@
     <string name="times">×</string>
     <string name="divide">÷</string>
     <string name="equal">=</string>
+    <string name="open_source_license">オープンソースライセンス</string>
 </resources>

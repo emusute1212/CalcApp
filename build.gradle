@@ -23,6 +23,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.0.31"
+        classpath 'com.google.gms:oss-licenses:0.9.1'
     }
 }
 
