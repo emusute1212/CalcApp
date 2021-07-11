@@ -1,13 +1,12 @@
 package io.github.emusute1212.calculator.ext
 
-import android.databinding.BindingAdapter
 import android.graphics.Typeface
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import io.github.emusute1212.calculator.model.entity.CalcEntity
 import io.github.emusute1212.calculator.model.entity.toStr
 import java.text.NumberFormat
 import java.util.*
-
 
 @BindingAdapter("android:showCalcList")
 fun TextView.showCalcList(progress: List<CalcEntity>) {

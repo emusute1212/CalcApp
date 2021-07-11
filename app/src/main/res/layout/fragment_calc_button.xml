@@ -10,12 +10,12 @@
                 type="io.github.emusute1212.calculator.viewmodel.CalcViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFF7F7F7">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/special_button_recycler_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/operator_button_recycler_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,5 +190,5 @@
                 app:layout_constraintStart_toEndOf="@+id/zero"
                 app:layout_constraintTop_toTopOf="@+id/zero" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

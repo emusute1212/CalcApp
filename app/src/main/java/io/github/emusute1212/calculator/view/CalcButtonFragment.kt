@@ -1,15 +1,14 @@
 package io.github.emusute1212.calculator.view
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.DaggerFragment
 import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ViewModelFactory
@@ -26,8 +25,8 @@ import javax.inject.Inject
 class CalcButtonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    val viewModel by lazy {
-        ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java)
+    private val viewModel: CalcViewModel by activityViewModels {
+        viewModelFactory
     }
 
     override fun onCreateView(
@@ -57,9 +56,9 @@ class CalcButtonFragment : DaggerFragment() {
         setupOperatorButtonAdapter(view.operator_button_recycler_view, operatorButtonAdapter)
 
         //C・ACボタンをセットするためのObserverを設定
-        viewModel.number.observe(this, Observer {
+        viewModel.number.observe(this) {
             specialButtonAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun setupSpecialButtonAdapter(

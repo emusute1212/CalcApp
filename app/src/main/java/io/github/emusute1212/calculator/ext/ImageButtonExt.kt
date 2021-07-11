@@ -1,8 +1,8 @@
 package io.github.emusute1212.calculator.ext
 
-import android.databinding.BindingAdapter
-import android.support.annotation.DrawableRes
 import android.widget.ImageButton
+import androidx.annotation.DrawableRes
+import androidx.databinding.BindingAdapter
 
 @BindingAdapter("android:setDrawable")
 fun ImageButton.setDrawable(@DrawableRes resource: Int) {

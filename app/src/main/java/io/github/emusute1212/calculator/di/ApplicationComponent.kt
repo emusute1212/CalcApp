@@ -2,8 +2,8 @@ package io.github.emusute1212.calculator.di
 
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import io.github.emusute1212.calculator.CalcApplication
 import io.github.emusute1212.calculator.di.modules.CalcButtonFragmentModule
 import io.github.emusute1212.calculator.di.modules.MainActivityModule
@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class,
+        AndroidInjectionModule::class,
         MainActivityModule::class,
         CalcButtonFragmentModule::class,
         UseCaseModule::class,

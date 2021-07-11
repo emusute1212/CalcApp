@@ -1,8 +1,8 @@
 package io.github.emusute1212.calculator.ext
 
-import android.databinding.BindingAdapter
 import android.view.HapticFeedbackConstants
 import android.view.View
+import androidx.databinding.BindingAdapter
 
 @BindingAdapter("android:onFeedbackClick")
 fun View.setOnFeedbackClick(listener: View.OnClickListener) {

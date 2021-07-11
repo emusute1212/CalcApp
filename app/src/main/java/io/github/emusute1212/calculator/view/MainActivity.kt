@@ -1,11 +1,11 @@
 package io.github.emusute1212.calculator.view
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
 import android.view.View
+import androidx.activity.viewModels
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dagger.android.support.DaggerAppCompatActivity
 import io.github.emusute1212.calculator.R
@@ -21,17 +21,19 @@ class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel: CalcViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CalcViewModel::class.java)
         DataBindingUtil.setContentView<ActivityMainBinding>(
             this,
             R.layout.activity_main
         ).also { binding ->
             binding.viewModel = viewModel
-            binding.setLifecycleOwner(this)
+            binding.lifecycleOwner = this
             binding.root.init()
         }
         val fragment = CalcButtonFragment.newInstance()

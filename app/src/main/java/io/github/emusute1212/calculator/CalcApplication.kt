@@ -2,7 +2,7 @@ package io.github.emusute1212.calculator
 
 import com.facebook.stetho.Stetho
 import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
+import dagger.android.DaggerApplication
 import io.github.emusute1212.calculator.di.DaggerApplicationComponent
 
 class CalcApplication : DaggerApplication() {

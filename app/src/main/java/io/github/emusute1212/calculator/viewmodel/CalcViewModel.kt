@@ -1,10 +1,10 @@
 package io.github.emusute1212.calculator.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableArrayList
-import android.support.annotation.DrawableRes
 import android.util.Log
+import androidx.annotation.DrawableRes
+import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ext.percent
 import io.github.emusute1212.calculator.model.entity.CalcEntity
