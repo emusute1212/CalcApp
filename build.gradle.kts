@@ -6,10 +6,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
-        classpath("org.jetbrains.kotlin:kotlin-android-extensions:1.5.0")
-        classpath("com.google.gms:oss-licenses:0.9.2")
+        classpath(Dep.Gradle.gradlePlugin)
+        classpath(Dep.Kotlin.gradlePlugin)
+        classpath(Dep.Kotlin.androidExtensions)
+        classpath(Dep.Google.ossLicensesPlugin)
     }
 }
 
