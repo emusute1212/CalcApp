@@ -18,15 +18,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
-            minifyEnabled = false
+        getByName("release") {
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
-        test.java.srcDirs += "src/test/kotlin"
-        androidTest.java.srcDirs += "src/androidTest/kotlin"
+        getByName("main").java.srcDirs("src/main/kotlin")
+        getByName("test").java.srcDirs("src/test/kotlin")
+        getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
 
     compileOptions {
@@ -34,8 +34,13 @@ android {
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
-    dataBinding {
-        enabled = true
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
 }
 
