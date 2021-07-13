@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("com.google.android.gms.oss-licenses-plugin")
 }
@@ -52,7 +51,8 @@ dependencies {
     implementation(Dep.Androidx.material)
     implementation(Dep.Androidx.activity)
     implementation(Dep.Androidx.fragment)
-    implementation(Dep.Androidx.lifecycle)
+    implementation(Dep.Androidx.Lifecycle.ktx)
+    implementation(Dep.Androidx.Lifecycle.commonJava8)
 
     // Test
     testImplementation(Dep.Test.jUnit)

@@ -13,12 +13,12 @@ import dagger.android.support.DaggerFragment
 import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ViewModelFactory
 import io.github.emusute1212.calculator.databinding.FragmentCalcButtonBinding
+import io.github.emusute1212.calculator.ext.autoCleared
 import io.github.emusute1212.calculator.model.entity.Operators
 import io.github.emusute1212.calculator.model.entity.Specials
 import io.github.emusute1212.calculator.view.adapter.OperatorButtonAdapter
 import io.github.emusute1212.calculator.view.adapter.SpecialButtonAdapter
 import io.github.emusute1212.calculator.viewmodel.CalcViewModel
-import kotlinx.android.synthetic.main.fragment_calc_button.view.*
 import javax.inject.Inject
 
 
@@ -28,14 +28,15 @@ class CalcButtonFragment : DaggerFragment() {
     private val viewModel: CalcViewModel by activityViewModels {
         viewModelFactory
     }
+    private var binding: FragmentCalcButtonBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding =
-            DataBindingUtil.inflate<FragmentCalcButtonBinding>(
+    ): View {
+        binding =
+            DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_calc_button,
                 container,
@@ -52,11 +53,11 @@ class CalcButtonFragment : DaggerFragment() {
         val specialButtonAdapter = SpecialButtonAdapter(viewModel)
         val operatorButtonAdapter = OperatorButtonAdapter(viewModel)
         //adapterのセットアップ
-        setupSpecialButtonAdapter(view.special_button_recycler_view, specialButtonAdapter)
-        setupOperatorButtonAdapter(view.operator_button_recycler_view, operatorButtonAdapter)
+        setupSpecialButtonAdapter(binding.specialButtonRecyclerView, specialButtonAdapter)
+        setupOperatorButtonAdapter(binding.operatorButtonRecyclerView, operatorButtonAdapter)
 
         //C・ACボタンをセットするためのObserverを設定
-        viewModel.number.observe(this) {
+        viewModel.number.observe(viewLifecycleOwner) {
             specialButtonAdapter.notifyDataSetChanged()
         }
     }
@@ -92,7 +93,7 @@ class CalcButtonFragment : DaggerFragment() {
     }
 
     companion object {
-        val FRAGMENT_TAG = CalcButtonFragment::class.java.simpleName
+        val FRAGMENT_TAG: String = CalcButtonFragment::class.java.simpleName
 
         fun newInstance(): CalcButtonFragment {
             return CalcButtonFragment()

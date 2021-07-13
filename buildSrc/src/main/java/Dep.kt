@@ -2,14 +2,10 @@ object Dep {
     object Kotlin {
         const val gradlePlugin =
             "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.Kotlin.kotlin}"
-
-        @Deprecated("KotlinAndroidExtensions is Deprecated!")
-        const val androidExtensions =
-            "org.jetbrains.kotlin:kotlin-android-extensions:${Version.Kotlin.kotlin}"
         const val stdLib =
             "org.jetbrains.kotlin:kotlin-stdlib:${Version.Kotlin.kotlin}"
         const val coroutine =
-            "org.jetbrains.kotlin:kotlin-android-extensions:${Version.Kotlin.coroutine}"
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.Kotlin.coroutine}"
     }
 
     object Gradle {
@@ -40,10 +36,15 @@ object Dep {
         const val material = "com.google.android.material:material:${Version.Androidx.material}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Version.Androidx.constraintLayout}"
-        const val lifecycle =
-            "androidx.lifecycle:lifecycle-livedata-ktx:${Version.Androidx.lifecycle}"
         const val fragment = "androidx.fragment:fragment-ktx:${Version.Androidx.fragment}"
         const val activity = "androidx.activity:activity-ktx:${Version.Androidx.activity}"
+
+        object Lifecycle {
+            const val ktx =
+                "androidx.lifecycle:lifecycle-livedata-ktx:${Version.Androidx.lifecycle}"
+            const val commonJava8 =
+                "androidx.lifecycle:lifecycle-common-java8:${Version.Androidx.lifecycle}"
+        }
     }
 
     object ThirdParty {

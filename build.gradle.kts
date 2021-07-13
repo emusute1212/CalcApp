@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         classpath(Dep.Gradle.gradlePlugin)
         classpath(Dep.Kotlin.gradlePlugin)
-        classpath(Dep.Kotlin.androidExtensions)
         classpath(Dep.Google.ossLicensesPlugin)
     }
 }
