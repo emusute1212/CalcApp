@@ -64,7 +64,7 @@ dependencies {
     implementation(Dep.Kotlin.coroutine)
 
     //Stetho
-    debugImplementation(Dep.ThirdParty.Stetho.core)
+    implementation(Dep.ThirdParty.Stetho.core)
 
     //Dagger2
     implementation(Dep.Google.Dagger.core)

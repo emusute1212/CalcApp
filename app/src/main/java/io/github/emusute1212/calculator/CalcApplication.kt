@@ -9,13 +9,15 @@ class CalcApplication : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        //Stethoの設定
-        Stetho.initialize(
-            Stetho.newInitializerBuilder(this)
-                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                .build()
-        )
+        if (BuildConfig.DEBUG) {
+            //Stethoの設定
+            Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                    .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                    .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                    .build()
+            )
+        }
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
