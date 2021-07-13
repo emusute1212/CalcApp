@@ -19,9 +19,9 @@ class CalcViewModel @Inject constructor(
     private val useCase: CalcUseCase
 ) : ViewModel() {
     val calcProgress = ObservableArrayList<CalcEntity>()
-    val number = MutableLiveData<String>()
-    private val inputNumber = MutableLiveData<String>()
-    private val result = MutableLiveData<String>()
+    val number = MutableLiveData<String?>()
+    private val inputNumber = MutableLiveData<String?>()
+    private val result = MutableLiveData<String?>()
     private var lastOperator: Operators? = null
     private var lastNumber: BigDecimal? = null
     private val resultTypeOfBigDecimal: BigDecimal
