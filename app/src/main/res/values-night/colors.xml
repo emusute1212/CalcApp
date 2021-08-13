@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#0F0F0F</color>
+    <color name="history_text">#D5D5D5</color>
+    <color name="input_text">#F7F7F7</color>
+    <color name="calc_result_area_background">#201F24</color>
+    <color name="background">#28272C</color>
+</resources>

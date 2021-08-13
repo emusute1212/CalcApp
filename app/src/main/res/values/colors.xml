@@ -3,4 +3,6 @@
     <color name="colorPrimaryDark">#B1E9CF</color>
     <color name="history_text">#FF5C5C5C</color>
     <color name="input_text">#FF222222</color>
+    <color name="calc_result_area_background">#F0F0F0</color>
+    <color name="background">#FFF7F7F7</color>
 </resources>

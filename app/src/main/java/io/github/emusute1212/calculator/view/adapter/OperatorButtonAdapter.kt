@@ -8,18 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.databinding.ButtonViewBinding
 import io.github.emusute1212.calculator.ext.setOnFeedbackClick
-import io.github.emusute1212.calculator.model.entity.Operators
+import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.viewmodel.CalcViewModel
 
 class OperatorButtonAdapter(
     private val viewModel: CalcViewModel
 ) : RecyclerView.Adapter<OperatorButtonAdapter.OperatorButtonViewHolder>() {
 
-    override fun getItemCount() = Operators.values().size
+    override fun getItemCount() = Controller.Operators.values().size
 
     override fun onBindViewHolder(holder: OperatorButtonViewHolder, position: Int) {
         if (holder.binding == null) return
-        val operator = Operators.values()[position]
+        val operator = Controller.Operators.getOperatorsFromOrder(position) ?: return
         holder.binding.viewModel = viewModel
         holder.binding.buttonEntity = operator
         holder.binding.button.setOnFeedbackClick {

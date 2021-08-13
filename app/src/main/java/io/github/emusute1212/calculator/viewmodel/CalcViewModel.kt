@@ -9,8 +9,6 @@ import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ext.percent
 import io.github.emusute1212.calculator.model.entity.CalcEntity
 import io.github.emusute1212.calculator.model.entity.Controller
-import io.github.emusute1212.calculator.model.entity.Operators
-import io.github.emusute1212.calculator.model.entity.Specials
 import io.github.emusute1212.calculator.model.usecase.CalcUseCase
 import java.math.BigDecimal
 import javax.inject.Inject
@@ -22,7 +20,7 @@ class CalcViewModel @Inject constructor(
     val number = MutableLiveData<String?>()
     private val inputNumber = MutableLiveData<String?>()
     private val result = MutableLiveData<String?>()
-    private var lastOperator: Operators? = null
+    private var lastOperator: Controller.Operators? = null
     private var lastNumber: BigDecimal? = null
     private val resultTypeOfBigDecimal: BigDecimal
         get() = result.value?.toBigDecimal() ?: 0.toBigDecimal()
@@ -59,27 +57,26 @@ class CalcViewModel @Inject constructor(
     @DrawableRes
     fun getButtonImageRes(button: Controller): Int {
         return when (button) {
-            Specials.CLEAR -> {
+            Controller.Specials.CLEAR -> {
                 if (isAllClear) {
                     R.drawable.all_clear
                 } else {
                     R.drawable.clear
                 }
             }
-            Specials.PERCENT -> R.drawable.percent
-            Specials.SWITCH -> R.drawable.plus_minus_switch
-            Operators.PLUS -> R.drawable.plus
-            Operators.MINUS -> R.drawable.minus
-            Operators.TIMES -> R.drawable.times
-            Operators.DIVIDE -> R.drawable.divide
-            Operators.EQUAL -> R.drawable.equal
-            else -> -1
+            Controller.Specials.PERCENT -> R.drawable.percent
+            Controller.Specials.SWITCH -> R.drawable.plus_minus_switch
+            Controller.Operators.PLUS -> R.drawable.plus
+            Controller.Operators.MINUS -> R.drawable.minus
+            Controller.Operators.TIMES -> R.drawable.times
+            Controller.Operators.DIVIDE -> R.drawable.divide
+            Controller.Operators.EQUAL -> R.drawable.equal
         }
     }
 
-    fun onClickOperatorButton(operators: Operators) {
+    fun onClickOperatorButton(operators: Controller.Operators) {
         if (number.value == ERROR) return
-        if (operators == Operators.EQUAL) {
+        if (operators == Controller.Operators.EQUAL) {
             inputEqual()
             return
         }
@@ -119,11 +116,11 @@ class CalcViewModel @Inject constructor(
         number.value = result.value
     }
 
-    fun onClickSpecialButton(special: Specials) {
+    fun onClickSpecialButton(special: Controller.Specials) {
         when (special) {
-            Specials.CLEAR -> if (isAllClear) allClear() else clear()
-            Specials.PERCENT -> percent()
-            Specials.SWITCH -> minus()
+            Controller.Specials.CLEAR -> if (isAllClear) allClear() else clear()
+            Controller.Specials.PERCENT -> percent()
+            Controller.Specials.SWITCH -> minus()
         }
     }
 
