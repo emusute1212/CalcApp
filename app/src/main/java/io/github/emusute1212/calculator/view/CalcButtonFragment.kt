@@ -14,8 +14,7 @@ import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ViewModelFactory
 import io.github.emusute1212.calculator.databinding.FragmentCalcButtonBinding
 import io.github.emusute1212.calculator.ext.autoCleared
-import io.github.emusute1212.calculator.model.entity.Operators
-import io.github.emusute1212.calculator.model.entity.Specials
+import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.view.adapter.OperatorButtonAdapter
 import io.github.emusute1212.calculator.view.adapter.SpecialButtonAdapter
 import io.github.emusute1212.calculator.viewmodel.CalcViewModel
@@ -68,7 +67,7 @@ class CalcButtonFragment : DaggerFragment() {
     ) {
         GridLayoutManager(
             requireContext(),
-            Specials.values().size,
+            Controller.Specials.values().size,
             LinearLayoutManager.VERTICAL,
             false
         ).also {
@@ -83,7 +82,7 @@ class CalcButtonFragment : DaggerFragment() {
     ) {
         GridLayoutManager(
             requireContext(),
-            Operators.values().size,
+            Controller.Operators.values().size,
             LinearLayoutManager.HORIZONTAL,
             false
         ).also {
