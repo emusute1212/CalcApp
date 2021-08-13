@@ -10,6 +10,7 @@ plugins {
 }
 
 android {
+    val shouldMakeApk = rootProject.file("upload-keystore.jks").exists()
     compileSdkVersion(Version.Calculator.compileSdk)
 
     defaultConfig {
@@ -26,6 +27,19 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+
+    if (shouldMakeApk) {
+        signingConfigs {
+            getByName("release") {
+                // https://qiita.com/hkusu/items/cadb572c979c4d729567
+                storeFile = rootProject.file("upload-keystore.jks")
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
