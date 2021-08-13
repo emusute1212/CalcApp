@@ -20,10 +20,10 @@
         </activity>
         <activity
                 android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-                android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+                android:theme="@style/AppLicense" />
         <activity
                 android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-                android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+                android:theme="@style/AppLicense" />
     </application>
 
 </manifest>
