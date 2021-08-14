@@ -27,6 +27,9 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            if (shouldMakeApk) {
+                signingConfig = signingConfigs.create("release")
+            }
         }
         getByName("debug") {
             versionNameSuffix = "(debug)"
