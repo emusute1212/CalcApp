@@ -4,7 +4,7 @@ object Version {
         const val targetSdk = 30
         const val minSdk = 22
 
-        private val version = ApplicationVersion(1, 0, 0, 0)
+        private val version = ApplicationVersion(1, 1, 0, 0)
         val code = version.code
         val name = version.name
     }
