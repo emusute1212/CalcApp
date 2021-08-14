@@ -7,6 +7,8 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("com.google.android.gms.oss-licenses-plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -93,6 +95,10 @@ dependencies {
 
     // OssLicenseView
     implementation(Dep.Google.ossLicenses)
+
+    // Firebase
+    implementation(platform(Dep.Google.Firebase.bom))
+    implementation(Dep.Google.Firebase.crashlytics)
 }
 
 // 自動登録されないOSSライセンスを追加するタスク

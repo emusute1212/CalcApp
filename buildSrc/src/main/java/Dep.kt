@@ -18,6 +18,7 @@ object Dep {
             "com.google.android.gms:oss-licenses-plugin:${Version.Google.ossLicensesPlugin}"
         const val ossLicenses =
             "com.google.android.gms:play-services-oss-licenses:${Version.Google.ossLicenses}"
+        const val googleService = "com.google.gms:google-services:${Version.Google.googleService}"
 
         object Dagger {
             const val core = "com.google.dagger:dagger:${Version.Google.dagger}"
@@ -27,6 +28,13 @@ object Dep {
                 "com.google.dagger:dagger-android-support:${Version.Google.dagger}"
             const val androidProcessor =
                 "com.google.dagger:dagger-android-processor:${Version.Google.dagger}"
+        }
+
+        object Firebase {
+            const val crashlyticsGradlePlugin =
+                "com.google.firebase:firebase-crashlytics-gradle:${Version.Google.Firebase.gradle}"
+            const val bom = "com.google.firebase:firebase-bom:${Version.Google.Firebase.bom}"
+            const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
         }
     }
 

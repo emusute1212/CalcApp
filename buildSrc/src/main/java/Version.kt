@@ -22,6 +22,12 @@ object Version {
         const val ossLicensesPlugin = "0.10.4"
         const val ossLicenses = "17.0.0"
         const val dagger = "2.37"
+        const val googleService = "4.3.8"
+
+        object Firebase {
+            const val gradle = "2.7.1"
+            const val bom = "28.2.0"
+        }
     }
 
     object Androidx {

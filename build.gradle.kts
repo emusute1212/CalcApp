@@ -9,6 +9,8 @@ buildscript {
         classpath(Dep.Gradle.gradlePlugin)
         classpath(Dep.Kotlin.gradlePlugin)
         classpath(Dep.Google.ossLicensesPlugin)
+        classpath(Dep.Google.googleService)
+        classpath(Dep.Google.Firebase.crashlyticsGradlePlugin)
     }
 }
 
