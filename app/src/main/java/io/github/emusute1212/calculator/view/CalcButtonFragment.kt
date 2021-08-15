@@ -1,42 +1,41 @@
 package io.github.emusute1212.calculator.view
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.android.support.DaggerFragment
 import io.github.emusute1212.calculator.R
 import io.github.emusute1212.calculator.ViewModelFactory
 import io.github.emusute1212.calculator.databinding.FragmentCalcButtonBinding
-import io.github.emusute1212.calculator.model.entity.Operators
-import io.github.emusute1212.calculator.model.entity.Specials
+import io.github.emusute1212.calculator.ext.autoCleared
+import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.view.adapter.OperatorButtonAdapter
 import io.github.emusute1212.calculator.view.adapter.SpecialButtonAdapter
 import io.github.emusute1212.calculator.viewmodel.CalcViewModel
-import kotlinx.android.synthetic.main.fragment_calc_button.view.*
 import javax.inject.Inject
 
 
 class CalcButtonFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    val viewModel by lazy {
-        ViewModelProviders.of(requireActivity(), viewModelFactory).get(CalcViewModel::class.java)
+    private val viewModel: CalcViewModel by activityViewModels {
+        viewModelFactory
     }
+    private var binding: FragmentCalcButtonBinding by autoCleared()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding =
-            DataBindingUtil.inflate<FragmentCalcButtonBinding>(
+    ): View {
+        binding =
+            DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_calc_button,
                 container,
@@ -53,13 +52,13 @@ class CalcButtonFragment : DaggerFragment() {
         val specialButtonAdapter = SpecialButtonAdapter(viewModel)
         val operatorButtonAdapter = OperatorButtonAdapter(viewModel)
         //adapterのセットアップ
-        setupSpecialButtonAdapter(view.special_button_recycler_view, specialButtonAdapter)
-        setupOperatorButtonAdapter(view.operator_button_recycler_view, operatorButtonAdapter)
+        setupSpecialButtonAdapter(binding.specialButtonRecyclerView, specialButtonAdapter)
+        setupOperatorButtonAdapter(binding.operatorButtonRecyclerView, operatorButtonAdapter)
 
         //C・ACボタンをセットするためのObserverを設定
-        viewModel.number.observe(this, Observer {
+        viewModel.number.observe(viewLifecycleOwner) {
             specialButtonAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun setupSpecialButtonAdapter(
@@ -68,7 +67,7 @@ class CalcButtonFragment : DaggerFragment() {
     ) {
         GridLayoutManager(
             requireContext(),
-            Specials.values().size,
+            Controller.Specials.values().size,
             LinearLayoutManager.VERTICAL,
             false
         ).also {
@@ -83,7 +82,7 @@ class CalcButtonFragment : DaggerFragment() {
     ) {
         GridLayoutManager(
             requireContext(),
-            Operators.values().size,
+            Controller.Operators.values().size,
             LinearLayoutManager.HORIZONTAL,
             false
         ).also {
@@ -93,7 +92,7 @@ class CalcButtonFragment : DaggerFragment() {
     }
 
     companion object {
-        val FRAGMENT_TAG = CalcButtonFragment::class.java.simpleName
+        val FRAGMENT_TAG: String = CalcButtonFragment::class.java.simpleName
 
         fun newInstance(): CalcButtonFragment {
             return CalcButtonFragment()
