@@ -1,28 +1,9 @@
-buildscript {
-    repositories {
-        google()
-        maven { url = java.net.URI.create("https://plugins.gradle.org/m2/") }
-        maven { url = java.net.URI.create("https://jitpack.io") }
-        mavenCentral()
-    }
-    dependencies {
-        classpath(Dep.Gradle.gradlePlugin)
-        classpath(Dep.Kotlin.gradlePlugin)
-        classpath(Dep.Google.ossLicensesPlugin)
-        classpath(Dep.Google.googleService)
-        classpath(Dep.Google.Firebase.crashlyticsGradlePlugin)
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        maven { url = java.net.URI.create("https://plugins.gradle.org/m2/") }
-        maven { url = java.net.URI.create("https://jitpack.io") }
-        mavenCentral()
-    }
-}
-
-tasks.register("clean", Delete::class.java) {
-    delete(rootProject.buildDir)
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.google.devtools.ksp) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.aboutlibraries) apply false
 }
