@@ -113,6 +113,7 @@ dependencies {
 
     // DaggerHilt
     implementation(libs.dagger.hilt)
+    implementation(libs.dagger.hilt.navigation.compose)
     ksp(libs.dagger.hilt.compiler)
 
     // Test

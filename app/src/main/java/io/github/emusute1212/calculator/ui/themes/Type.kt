@@ -9,20 +9,25 @@ import androidx.compose.ui.unit.sp
 import io.github.emusute1212.calculator.R
 
 val Typography = Typography(
-    bodyLarge = TextStyle(
+    titleLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.roboto_regular)),
         fontWeight = FontWeight.Normal,
         fontSize = 68.sp,
     ),
-    bodyMedium = TextStyle(
-        fontFamily = FontFamily(Font(R.font.roboto_regular)),
-        fontWeight = FontWeight.Normal,
-        fontSize = 48.sp,
-    ),
-    bodySmall = TextStyle(
+    titleMedium = TextStyle(
         fontFamily = FontFamily(Font(R.font.roboto_light)),
         fontWeight = FontWeight.Normal,
         fontSize = 30.sp,
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily(Font(R.font.roboto_regular)),
+        fontWeight = FontWeight.Normal,
+        fontSize = 36.sp,
+    ),
+    bodySmall = TextStyle(
+        fontFamily = FontFamily(Font(R.font.roboto_regular)),
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
     ),
     labelLarge = TextStyle(
         fontFamily = FontFamily(Font(R.font.roboto_medium)),
