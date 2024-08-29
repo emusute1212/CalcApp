@@ -2,7 +2,9 @@ package io.github.emusute1212.calculator.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import io.github.emusute1212.calculator.extensitons.CalculationMathContext
 import io.github.emusute1212.calculator.extensitons.toFormattedNumber
+import io.github.emusute1212.calculator.extensitons.toStringWithMathContext
 import io.github.emusute1212.calculator.model.entity.CalcEntity
 import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.ui.main.section.numbers.NumberButtonSectionUiState
@@ -33,7 +35,7 @@ fun rememberCalculatorScreenUiState(
 
         CalculatorViewModel.CalculatorMode.FixOperator,
         CalculatorViewModel.CalculatorMode.Calculated -> {
-            viewModel.result.toString().toFormattedNumber()
+            viewModel.result.toStringWithMathContext(CalculationMathContext).toFormattedNumber()
         }
 
         CalculatorViewModel.CalculatorMode.Error -> {

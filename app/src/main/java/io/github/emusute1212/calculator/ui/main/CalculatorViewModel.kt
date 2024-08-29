@@ -1,10 +1,11 @@
 package io.github.emusute1212.calculator.ui.main
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import io.github.emusute1212.calculator.extensitons.CalculationMathContext
+import io.github.emusute1212.calculator.extensitons.MaxInputNumberSize
 import io.github.emusute1212.calculator.model.entity.CalcEntity
 import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.model.entity.Controller.Operators.Divide
@@ -12,8 +13,8 @@ import io.github.emusute1212.calculator.model.entity.Controller.Operators.Equal
 import io.github.emusute1212.calculator.model.entity.Controller.Operators.Minus
 import io.github.emusute1212.calculator.model.entity.Controller.Operators.Plus
 import io.github.emusute1212.calculator.model.entity.Controller.Operators.Times
+import timber.log.Timber
 import java.math.BigDecimal
-import java.math.MathContext
 
 class CalculatorViewModel : ViewModel() {
     var inputText by mutableStateOf("0")
@@ -79,6 +80,7 @@ class CalculatorViewModel : ViewModel() {
                 } catch (e: ArithmeticException) {
                     calculatorMode = CalculatorMode.Error
                     canAllClear = true
+                    Timber.e(e)
                     return
                 }
             } ?: input
@@ -98,26 +100,24 @@ class CalculatorViewModel : ViewModel() {
     ): BigDecimal {
         return when (operator) {
             Divide -> {
-                leftNumber.divide(rightNumber, MathContext.DECIMAL32)
+                leftNumber.divide(rightNumber, CalculationMathContext)
             }
 
             Times -> {
-                leftNumber.multiply(rightNumber, MathContext.DECIMAL32)
+                leftNumber.multiply(rightNumber)
             }
 
             Minus -> {
-                leftNumber.subtract(rightNumber, MathContext.DECIMAL32)
+                leftNumber.subtract(rightNumber)
             }
 
             Plus -> {
-                leftNumber.add(rightNumber, MathContext.DECIMAL32)
+                leftNumber.add(rightNumber)
             }
 
             else -> {
                 throw IllegalArgumentException("Invalid operator")
             }
-        }.also {
-            Log.d("tteesstt", "result: ${it.toPlainString()}")
         }
     }
 
@@ -137,6 +137,7 @@ class CalculatorViewModel : ViewModel() {
         } catch (e: ArithmeticException) {
             calculatorMode = CalculatorMode.Error
             canAllClear = true
+            Timber.e(e)
             return
         }
         calculatorMode = CalculatorMode.Calculated
@@ -159,8 +160,8 @@ class CalculatorViewModel : ViewModel() {
 
     private fun onInputPercent() {
         inputText = result
-            .multiply(inputText.toBigDecimal(), MathContext.DECIMAL32)
-            .divide(100.toBigDecimal(), MathContext.DECIMAL32)
+            .multiply(inputText.toBigDecimal())
+            .divide(100.toBigDecimal(), CalculationMathContext)
             .toString()
     }
 
@@ -184,14 +185,10 @@ class CalculatorViewModel : ViewModel() {
     ): Boolean {
         return (number == Controller.Numbers.Dot && inputText.contains(number.text))
                 || (calculatorMode == CalculatorMode.Error)
-                || (inputText.replace(".", "").length >= MAX_INPUT_NUMBER_SIZE)
+                || (inputText.replace(".", "").length >= MaxInputNumberSize)
     }
 
     enum class CalculatorMode {
         IdleInput, InputtingNumber, FixOperator, Calculated, Error,
-    }
-
-    companion object {
-        private const val MAX_INPUT_NUMBER_SIZE: Int = 9
     }
 }

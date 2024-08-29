@@ -116,6 +116,9 @@ dependencies {
     implementation(libs.dagger.hilt.navigation.compose)
     ksp(libs.dagger.hilt.compiler)
 
+    // Timber
+    implementation(libs.timber)
+
     // Test
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
