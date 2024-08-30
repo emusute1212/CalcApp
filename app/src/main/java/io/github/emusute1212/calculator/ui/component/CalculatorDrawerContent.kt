@@ -30,7 +30,7 @@ fun CalculatorDrawerContent(
             NavigationDrawerItem(
                 label = {
                     Text(
-                        text = stringResource(id = R.string.open_source_license),
+                        text = stringResource(id = it.displayText),
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.padding(16.dp),
                     )

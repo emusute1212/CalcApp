@@ -197,31 +197,6 @@ private fun CalculatorScreen(
     }
 }
 
-//@Composable
-//private fun AutoSizeTextTypeText(
-//    text: String,
-//    maxFontSize: TextUnit,
-//    maxLine: Int = Int.MAX_VALUE,
-//    style: TextStyle,
-//    modifier: Modifier,
-//) {
-//    var textSize by remember(text) { mutableStateOf(maxFontSize) }
-//    Text(
-//        text = text,
-//        style = style.copy(
-//            fontSize = textSize,
-//        ),
-//        maxLines = maxLine,
-//        overflow = TextOverflow.Ellipsis,
-//        modifier = modifier,
-//        onTextLayout = {
-//            if (it.hasVisualOverflow) {
-//                textSize = (textSize.value - 1.0F).sp
-//            }
-//        },
-//    )
-//}
-
 @Preview
 @Composable
 fun PreviewCalculatorScreen() {

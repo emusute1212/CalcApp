@@ -52,7 +52,7 @@ sealed interface Controller {
             text = "×"
         ),
         Minus(
-            text = "-"
+            text = "−"
         ),
         Plus(
             text = "+"
@@ -73,7 +73,7 @@ sealed interface Controller {
             text = "C"
         ),
         Switch(
-            text = "+/-"
+            text = "+/−"
         ),
         Percent(
             text = "%"
