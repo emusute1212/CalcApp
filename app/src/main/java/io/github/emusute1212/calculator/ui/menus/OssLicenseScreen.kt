@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -61,6 +62,9 @@ private fun OssLicenseScreen(
                     Image(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         contentDescription = null,
+                        colorFilter = ColorFilter.tint(
+                            color = MaterialTheme.colorScheme.onBackground,
+                        ),
                         modifier = Modifier
                             .clickable {
                                 navController.popBackStack()

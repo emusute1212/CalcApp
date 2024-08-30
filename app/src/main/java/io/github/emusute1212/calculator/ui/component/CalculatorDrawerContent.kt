@@ -48,5 +48,5 @@ enum class DrawerContent(
     @StringRes
     val displayText: Int
 ) {
-    LICENSE(R.string.app_name)
+    LICENSE(R.string.open_source_license)
 }
