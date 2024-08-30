@@ -2,6 +2,8 @@ package io.github.emusute1212.calculator.ui.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import io.github.emusute1212.calculator.extensitons.CalculationMathContext
 import io.github.emusute1212.calculator.extensitons.toFormattedNumber
 import io.github.emusute1212.calculator.extensitons.toStringWithMathContext
@@ -76,12 +78,14 @@ fun rememberCalculatorScreenUiState(
 private fun rememberCalculatorOnAction(
     viewModel: CalculatorViewModel,
 ): CalculatorOnAction {
+    val haptic = LocalHapticFeedback.current
     return remember(
         viewModel,
     ) {
         CalculatorOnAction { action ->
             when (action) {
                 is CalculatorAction.OnClickControllerButton -> {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     when (action.controller) {
                         is Controller.Numbers -> {
                             viewModel.onInputNumber(action.controller)
