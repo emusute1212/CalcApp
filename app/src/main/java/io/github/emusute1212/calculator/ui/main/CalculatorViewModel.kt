@@ -21,16 +21,17 @@ class CalculatorViewModel : ViewModel() {
     var result: BigDecimal by mutableStateOf(BigDecimal.ZERO)
     var calculationHistories by mutableStateOf(listOf<CalcEntity>())
     var calculatorMode by mutableStateOf(CalculatorMode.IdleInput)
-    var canAllClear by mutableStateOf(true)
 
     fun onInputNumber(number: Controller.Numbers) {
         if (shouldBeInputText(number)) return
-        if (calculatorMode == CalculatorMode.Calculated) {
+        if (
+            calculatorMode == CalculatorMode.Calculated
+            || calculatorMode == CalculatorMode.InputClear
+        ) {
             clearHistoryAndResult()
         }
 
         calculatorMode = CalculatorMode.InputtingNumber
-        canAllClear = false
 
         if (number != Controller.Numbers.Dot && inputText == "0") {
             // Clear zero in the top.
@@ -66,7 +67,10 @@ class CalculatorViewModel : ViewModel() {
         input: BigDecimal,
         operator: Controller.Operators,
     ) {
-        if (calculatorMode == CalculatorMode.FixOperator) {
+        if (
+            calculatorMode == CalculatorMode.FixOperator
+            || calculatorMode == CalculatorMode.InputClear
+        ) {
             val latestHistory = calculationHistories.last()
             calculationHistories -= latestHistory
             calculationHistories += CalcEntity(
@@ -79,7 +83,6 @@ class CalculatorViewModel : ViewModel() {
                     calculate(result, it.operator, input)
                 } catch (e: ArithmeticException) {
                     calculatorMode = CalculatorMode.Error
-                    canAllClear = true
                     Timber.e(e)
                     return
                 }
@@ -136,7 +139,6 @@ class CalculatorViewModel : ViewModel() {
             calculate(result, lastOfHistory.operator, rightNumber)
         } catch (e: ArithmeticException) {
             calculatorMode = CalculatorMode.Error
-            canAllClear = true
             Timber.e(e)
             return
         }
@@ -145,9 +147,8 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun onInputClear() {
-        canAllClear = true
+        calculatorMode = CalculatorMode.InputClear
         initializeInputText()
-        result = BigDecimal.ZERO
     }
 
     private fun onInputAllClear() {
@@ -189,6 +190,6 @@ class CalculatorViewModel : ViewModel() {
     }
 
     enum class CalculatorMode {
-        IdleInput, InputtingNumber, FixOperator, Calculated, Error,
+        IdleInput, InputtingNumber, FixOperator, InputClear, Calculated, Error,
     }
 }
