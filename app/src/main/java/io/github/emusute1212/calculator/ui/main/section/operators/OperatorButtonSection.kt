@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -89,23 +90,20 @@ private fun OperatorButton(
     operator: Controller.Operators,
     onClick: (Controller.Operators) -> Unit,
 ) {
-    Box(
+    Text(
+        text = operator.text,
+        style = MaterialTheme.typography.bodyMedium.copy(
+            color = contentColor,
+        ),
         modifier = Modifier
             .size(size = 64.dp)
             .clip(RoundedCornerShape(percent = 20))
             .background(backgroundColor)
             .clickable {
                 onClick(operator)
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = operator.text,
-            style = MaterialTheme.typography.bodyMedium.copy(
-                color = contentColor,
-            ),
-        )
-    }
+            }
+            .wrapContentSize(Alignment.Center),
+    )
 }
 
 @Preview(

@@ -14,7 +14,6 @@ import io.github.emusute1212.calculator.ui.main.section.operators.OperatorButton
 import io.github.emusute1212.calculator.ui.main.section.operators.rememberOperatorButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.specials.SpecialsButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.specials.rememberSpecialsButtonSectionUiState
-import timber.log.Timber
 
 data class CalculatorScreenUiState(
     val calculationHistory: String,

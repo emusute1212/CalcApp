@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,7 +32,7 @@ fun SpecialsButtonSection(
                 Controller.Specials.AllClear
             } else {
                 Controller.Specials.Clear
-           },
+            },
             onClick = {
                 state.onAction(
                     CalculatorAction.OnClickControllerButton(
@@ -68,23 +69,20 @@ private fun SpecialButton(
     special: Controller.Specials,
     onClick: (Controller.Specials) -> Unit,
 ) {
-    Box(
+    Text(
+        text = special.text,
+        style = MaterialTheme.typography.bodySmall.copy(
+            color = MaterialTheme.colorScheme.onSecondary,
+        ),
         modifier = Modifier
             .size(size = 64.dp)
             .clip(RoundedCornerShape(percent = 20))
             .background(MaterialTheme.colorScheme.secondary)
             .clickable {
                 onClick(special)
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = special.text,
-            style = MaterialTheme.typography.bodySmall.copy(
-                color = MaterialTheme.colorScheme.onSecondary,
-            ),
-        )
-    }
+            }
+            .wrapContentSize(Alignment.Center),
+    )
 }
 
 @Preview(

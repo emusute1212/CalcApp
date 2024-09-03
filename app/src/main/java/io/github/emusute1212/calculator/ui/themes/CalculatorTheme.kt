@@ -1,10 +1,16 @@
 package io.github.emusute1212.calculator.ui.themes
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.Color
 
 private val LightColorScheme = lightColorScheme(
     primary = White800,
@@ -54,6 +60,23 @@ fun CalculatorTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
-    )
+    ) {
+        CompositionLocalProvider(
+            value = LocalRippleTheme provides object : RippleTheme {
+                @Composable
+                override fun defaultColor(): Color {
+                    return colorScheme.outline
+                }
+
+                @Composable
+                override fun rippleAlpha(): RippleAlpha {
+                    return RippleTheme.defaultRippleAlpha(
+                        contentColor = LocalContentColor.current,
+                        lightTheme = darkTheme.not()
+                    )
+                }
+            },
+            content = content
+        )
+    }
 }

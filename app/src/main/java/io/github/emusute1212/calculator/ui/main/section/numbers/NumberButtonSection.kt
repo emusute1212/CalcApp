@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -166,7 +168,11 @@ private fun NumberButton(
     number: Controller.Numbers,
     onClick: (Controller.Numbers) -> Unit
 ) {
-    Box(
+    Text(
+        text = number.text,
+        style = MaterialTheme.typography.bodySmall.copy(
+            color = MaterialTheme.colorScheme.onSurface,
+        ),
         modifier = Modifier
             .width(width)
             .height(64.dp)
@@ -174,16 +180,9 @@ private fun NumberButton(
             .background(MaterialTheme.colorScheme.surface)
             .clickable {
                 onClick(number)
-            },
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text = number.text,
-            style = MaterialTheme.typography.bodySmall.copy(
-                color = MaterialTheme.colorScheme.onSurface,
-            ),
-        )
-    }
+            }
+            .wrapContentSize(Alignment.Center),
+    )
 }
 
 @Preview(
