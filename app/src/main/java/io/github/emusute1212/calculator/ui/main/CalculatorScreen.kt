@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -21,22 +20,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import io.github.emusute1212.calculator.R
-import io.github.emusute1212.calculator.model.entity.CalcEntity
-import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.ui.component.AutoSizeText
-import io.github.emusute1212.calculator.ui.component.AutoTextAlign
 import io.github.emusute1212.calculator.ui.component.CalculatorDrawerContent
 import io.github.emusute1212.calculator.ui.component.DrawerContent
+import io.github.emusute1212.calculator.ui.component.TextGravity
 import io.github.emusute1212.calculator.ui.main.section.numbers.NumberButtonSection
 import io.github.emusute1212.calculator.ui.main.section.numbers.NumberButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.operators.OperatorButtonSection
@@ -46,7 +44,6 @@ import io.github.emusute1212.calculator.ui.main.section.specials.SpecialsButtonS
 import io.github.emusute1212.calculator.ui.menus.OssLicenseScreenRoute
 import io.github.emusute1212.calculator.ui.themes.CalculatorTheme
 import kotlinx.coroutines.launch
-import java.math.BigDecimal
 
 const val CalculatorScreenRoute = "calculator_screen"
 fun NavGraphBuilder.calculatorScreen(
@@ -129,27 +126,19 @@ private fun CalculatorScreen(
             .background(color = MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Bottom,
     ) {
-        Box(
+        AutoSizeText(
+            text = state.calculationHistory,
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.outlineVariant,
+            ),
+            textGravity = TextGravity.BottomEnd,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
-            contentAlignment = Alignment.BottomEnd,
-        ) {
-            AutoSizeText(
-                text = state.calculationHistory.joinToString("") {
-                    it.number.toString() + it.operator.text
-                },
-                style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.outlineVariant,
+                .weight(1f)
+                .padding(
+                    horizontal = 12.dp,
                 ),
-                textAlign = AutoTextAlign.TextEnd,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 12.dp,
-                    ),
-            )
-        }
+        )
         Spacer(modifier = Modifier.height(12.dp))
         AutoSizeText(
             text = state.displayText,
@@ -157,7 +146,7 @@ private fun CalculatorScreen(
                 color = MaterialTheme.colorScheme.outline,
             ),
             maxLine = 1,
-            textAlign = AutoTextAlign.TextEnd,
+            textGravity = TextGravity.BottomEnd,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(82.dp)
@@ -197,22 +186,33 @@ private fun CalculatorScreen(
     }
 }
 
-@Preview
+@Preview(name = "NEXUS_7", device = Devices.NEXUS_7)
+@Preview(name = "NEXUS_7_2013", device = Devices.NEXUS_7_2013)
+@Preview(name = "NEXUS_5", device = Devices.NEXUS_5)
+@Preview(name = "NEXUS_6", device = Devices.NEXUS_6)
+@Preview(name = "NEXUS_9", device = Devices.NEXUS_9)
+@Preview(name = "NEXUS_10", device = Devices.NEXUS_10)
+@Preview(name = "NEXUS_5X", device = Devices.NEXUS_5X)
+@Preview(name = "NEXUS_6P", device = Devices.NEXUS_6P)
+@Preview(name = "PIXEL_C", device = Devices.PIXEL_C)
+@Preview(name = "PIXEL", device = Devices.PIXEL)
+@Preview(name = "PIXEL_XL", device = Devices.PIXEL_XL)
+@Preview(name = "PIXEL_2", device = Devices.PIXEL_2)
+@Preview(name = "PIXEL_2_XL", device = Devices.PIXEL_2_XL)
+@Preview(name = "PIXEL_3", device = Devices.PIXEL_3)
+@Preview(name = "PIXEL_3_XL", device = Devices.PIXEL_3_XL)
+@Preview(name = "PIXEL_3A", device = Devices.PIXEL_3A)
+@Preview(name = "PIXEL_3A_XL", device = Devices.PIXEL_3A_XL)
+@Preview(name = "PIXEL_4", device = Devices.PIXEL_4)
+@Preview(name = "PIXEL_4_XL", device = Devices.PIXEL_4_XL)
+@Preview(name = "AUTOMOTIVE_1024p", device = Devices.AUTOMOTIVE_1024p)
+@PreviewLightDark
 @Composable
 fun PreviewCalculatorScreen() {
     CalculatorTheme {
         CalculatorScreen(
             state = CalculatorScreenUiState(
-                calculationHistory = listOf(
-                    CalcEntity(
-                        number = BigDecimal(2),
-                        operator = Controller.Operators.Minus
-                    ),
-                    CalcEntity(
-                        number = BigDecimal(1),
-                        operator = Controller.Operators.Minus
-                    )
-                ),
+                calculationHistory = "2-1-",
                 displayText = "123,456,789",
                 numberButtonSectionUiState = NumberButtonSectionUiState(
                     onAction = {}

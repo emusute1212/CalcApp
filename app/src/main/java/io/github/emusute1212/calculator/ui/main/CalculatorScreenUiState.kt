@@ -7,7 +7,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import io.github.emusute1212.calculator.extensitons.CalculationMathContext
 import io.github.emusute1212.calculator.extensitons.toFormattedNumber
 import io.github.emusute1212.calculator.extensitons.toStringWithMathContext
-import io.github.emusute1212.calculator.model.entity.CalcEntity
 import io.github.emusute1212.calculator.model.entity.Controller
 import io.github.emusute1212.calculator.ui.main.section.numbers.NumberButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.numbers.rememberNumberButtonSectionUiState
@@ -15,9 +14,10 @@ import io.github.emusute1212.calculator.ui.main.section.operators.OperatorButton
 import io.github.emusute1212.calculator.ui.main.section.operators.rememberOperatorButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.specials.SpecialsButtonSectionUiState
 import io.github.emusute1212.calculator.ui.main.section.specials.rememberSpecialsButtonSectionUiState
+import timber.log.Timber
 
 data class CalculatorScreenUiState(
-    val calculationHistory: List<CalcEntity>,
+    val calculationHistory: String,
     val displayText: String,
     val numberButtonSectionUiState: NumberButtonSectionUiState,
     val operatorButtonSectionUiState: OperatorButtonSectionUiState,
@@ -28,7 +28,13 @@ data class CalculatorScreenUiState(
 fun rememberCalculatorScreenUiState(
     viewModel: CalculatorViewModel,
 ): CalculatorScreenUiState {
-    val calculationHistory = viewModel.calculationHistories
+    val calculationHistory = remember(viewModel.calculationHistories) {
+        viewModel.calculationHistories.joinToString("") {
+            it.number
+                .toStringWithMathContext(CalculationMathContext)
+                .toFormattedNumber() + it.operator.text
+        }
+    }
     val displayText = when (viewModel.calculatorMode) {
         CalculatorViewModel.CalculatorMode.IdleInput,
         CalculatorViewModel.CalculatorMode.InputtingNumber,
