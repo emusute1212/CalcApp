@@ -72,6 +72,7 @@ private fun CalculatorScreenHost(
 
     ModalNavigationDrawer(
         drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen, // https://issuetracker.google.com/issues/337961993
         drawerContent = {
             CalculatorDrawerContent(
                 onClickContent = {
