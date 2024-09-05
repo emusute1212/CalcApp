@@ -70,6 +70,7 @@ class CalculatorViewModel : ViewModel() {
         if (
             calculatorMode == CalculatorMode.FixOperator
             || calculatorMode == CalculatorMode.InputClear
+            || calculatorMode == CalculatorMode.Calculated
         ) {
             val latestHistory = calculationHistories.last()
             calculationHistories -= latestHistory
