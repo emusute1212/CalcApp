@@ -1,52 +1,83 @@
 package io.github.emusute1212.calculator.model.entity
 
 sealed interface Controller {
-    val order: Int
+    val text: String
 
-    /**
-     * @param order 上から何番目に表示するかという順番
-     */
-    enum class Operators(
-        override val order: Int
+    enum class Numbers(
+        override val text: String,
     ) : Controller {
-        DIVIDE(0),
-        TIMES(1),
-        MINUS(2),
-        PLUS(3),
-        EQUAL(4);
+        Dot(
+            text = "."
+        ),
+        Zero(
+            text = "0"
+        ),
+        One(
+            text = "1"
+        ),
+        Two(
+            text = "2"
+        ),
+        Three(
+            text = "3"
+        ),
+        Four(
+            text = "4"
+        ),
+        Five(
+            text = "5"
+        ),
+        Six(
+            text = "6"
+        ),
+        Seven(
+            text = "7"
+        ),
+        Eight(
+            text = "8"
+        ),
+        Nine(
+            text = "9"
+        ),
+        ;
+    }
 
-        companion object {
-            fun getOperatorsFromOrder(order: Int): Operators? {
-                return values().find {
-                    it.order == order
-                }
-            }
-        }
+    enum class Operators(
+        override val text: String,
+    ) : Controller {
+        Divide(
+            text = "÷"
+        ),
+        Times(
+            text = "×"
+        ),
+        Minus(
+            text = "−"
+        ),
+        Plus(
+            text = "+"
+        ),
+        Equal(
+            text = "="
+        ),
+        ;
     }
 
     enum class Specials(
-        override val order: Int
+        override val text: String,
     ) : Controller {
-        CLEAR(0),
-        SWITCH(1),
-        PERCENT(2);
-
-        companion object {
-            fun getSpecialsFromOrder(order: Int): Specials? {
-                return values().find {
-                    it.order == order
-                }
-            }
-        }
-    }
-}
-
-fun Controller.Operators.toStr(): String {
-    return when (this) {
-        Controller.Operators.DIVIDE -> "÷"
-        Controller.Operators.TIMES -> "×"
-        Controller.Operators.MINUS -> "-"
-        Controller.Operators.PLUS -> "+"
-        Controller.Operators.EQUAL -> "="
+        AllClear(
+            text = "AC"
+        ),
+        Clear(
+            text = "C"
+        ),
+        Switch(
+            text = "+/−"
+        ),
+        Percent(
+            text = "%"
+        ),
+        ;
     }
 }

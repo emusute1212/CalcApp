@@ -1,0 +1,16 @@
+{
+  "uniqueId": "org.google.fonts:roboto",
+  "artifactVersion": "v2.138",
+  "developers": [
+    {
+      "organisationUrl": "https://fonts.google.com/",
+      "name": "Google, Inc."
+    }
+  ],
+  "description": "",
+  "name": "Roboto",
+  "website": "https://fonts.google.com/specimen/Roboto",
+  "licenses": [
+    "Apache-2.0"
+  ]
+}
