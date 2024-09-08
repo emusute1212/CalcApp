@@ -26,7 +26,7 @@ jobs:
           export KEYSTORE_PASSWORD='${{ secrets.KEYSTORE_PASSWORD }}'
           export KEY_ALIAS='${{ secrets.KEY_ALIAS }}'
           export KEY_PASSWORD='${{ secrets.KEY_PASSWORD }}'
-          ./gradlew assembleRelease
+          ./gradlew bundleRelease
       - name: Get app-bundle path
         id: app-bundle-path
         run: |
