@@ -31,7 +31,7 @@ jobs:
         id: app-bundle-path
         run: |
           path=$(find **/build/outputs/bundle -name '*.aab' -type f | head -1)
-          echo "::set-output name=path::$path"
+          echo "path=$path" >> $GITHUB_OUTPUT
       - name: Upload aab file
         uses: actions/upload-artifact@v4
         with:
