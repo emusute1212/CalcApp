@@ -72,12 +72,15 @@ class CalculatorViewModel : ViewModel() {
             || calculatorMode == CalculatorMode.InputClear
             || calculatorMode == CalculatorMode.Calculated
         ) {
-            val latestHistory = calculationHistories.last()
-            calculationHistories -= latestHistory
-            calculationHistories += CalcEntity(
-                number = latestHistory.number,
-                operator = operator,
-            )
+            calculationHistories = calculationHistories.mapIndexed { index, calcEntity ->
+                if (index == calculationHistories.lastIndex) {
+                    calcEntity.copy(
+                        operator = operator,
+                    )
+                } else {
+                    calcEntity
+                }
+            }
         } else {
             this.result = calculationHistories.lastOrNull()?.let {
                 try {
