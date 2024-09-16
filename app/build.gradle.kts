@@ -10,7 +10,7 @@ plugins {
 
 android {
     val shouldMakeApk = rootProject.file("upload-keystore.jks").exists()
-    val version = Version(2, 0, 0, 0)
+    val version = Version(2, 0, 1, 0)
     namespace = libs.versions.namespace.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
