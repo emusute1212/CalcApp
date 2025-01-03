@@ -18,15 +18,20 @@ import java.math.BigDecimal
 
 class CalculatorViewModel : ViewModel() {
     var inputText by mutableStateOf("0")
+        private set
     var result: BigDecimal by mutableStateOf(BigDecimal.ZERO)
+        private set
     var calculationHistories by mutableStateOf(listOf<CalcEntity>())
+        private set
     var calculatorMode by mutableStateOf(CalculatorMode.IdleInput)
+        private set
+    private var lastInputButton: Controller? = null
 
     fun onInputNumber(number: Controller.Numbers) {
         if (shouldBeInputText(number)) return
         if (
             calculatorMode == CalculatorMode.Calculated
-            || calculatorMode == CalculatorMode.InputClear
+            || calculatorMode == CalculatorMode.InputClearCalculated
         ) {
             clearHistoryAndResult()
         }
@@ -38,6 +43,7 @@ class CalculatorViewModel : ViewModel() {
             inputText = ""
         }
         inputText += number.text
+        lastInputButton = number
     }
 
     fun onInputSpecial(specials: Controller.Specials) {
@@ -47,6 +53,7 @@ class CalculatorViewModel : ViewModel() {
             Controller.Specials.Switch -> onInputSwitch()
             Controller.Specials.Percent -> onInputPercent()
         }
+        lastInputButton = specials
     }
 
     fun onInputOperator(operator: Controller.Operators) {
@@ -60,6 +67,7 @@ class CalculatorViewModel : ViewModel() {
                 operator,
             )
         }
+        lastInputButton = operator
     }
 
     private fun onInputCalculate(
@@ -69,7 +77,7 @@ class CalculatorViewModel : ViewModel() {
     ) {
         if (
             calculatorMode == CalculatorMode.FixOperator
-            || calculatorMode == CalculatorMode.InputClear
+            || calculatorMode.isClear
             || calculatorMode == CalculatorMode.Calculated
         ) {
             calculationHistories = calculationHistories.mapIndexed { index, calcEntity ->
@@ -151,7 +159,11 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun onInputClear() {
-        calculatorMode = CalculatorMode.InputClear
+        calculatorMode = if (lastInputButton is Controller.Numbers) {
+            CalculatorMode.InputClearNumber
+        } else {
+            CalculatorMode.InputClearCalculated
+        }
         initializeInputText()
     }
 
@@ -194,6 +206,15 @@ class CalculatorViewModel : ViewModel() {
     }
 
     enum class CalculatorMode {
-        IdleInput, InputtingNumber, FixOperator, InputClear, Calculated, Error,
+        IdleInput,
+        InputtingNumber,
+        FixOperator,
+        InputClearNumber,
+        InputClearCalculated,
+        Calculated,
+        Error;
+
+        val isClear
+            get() = (this == InputClearNumber || this == InputClearCalculated)
     }
 }

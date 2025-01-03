@@ -37,7 +37,8 @@ fun rememberCalculatorScreenUiState(
     val displayText = when (viewModel.calculatorMode) {
         CalculatorViewModel.CalculatorMode.IdleInput,
         CalculatorViewModel.CalculatorMode.InputtingNumber,
-        CalculatorViewModel.CalculatorMode.InputClear -> {
+        CalculatorViewModel.CalculatorMode.InputClearCalculated,
+        CalculatorViewModel.CalculatorMode.InputClearNumber -> {
             viewModel.inputText.toFormattedNumber()
         }
 
@@ -51,7 +52,7 @@ fun rememberCalculatorScreenUiState(
         }
     }
     val canAllClear = (viewModel.calculatorMode == CalculatorViewModel.CalculatorMode.IdleInput
-            || viewModel.calculatorMode == CalculatorViewModel.CalculatorMode.InputClear
+            || viewModel.calculatorMode.isClear
             || viewModel.calculatorMode == CalculatorViewModel.CalculatorMode.Error)
     val onAction = rememberCalculatorOnAction(
         viewModel = viewModel,
