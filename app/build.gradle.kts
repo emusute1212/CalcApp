@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.compose)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
@@ -10,7 +10,7 @@ plugins {
 
 android {
     val shouldMakeApk = rootProject.file("upload-keystore.jks").exists()
-    val version = Version(2, 0, 2, 0)
+    val version = Version(2, 0, 3, 0)
     namespace = libs.versions.namespace.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
@@ -58,14 +58,8 @@ android {
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
-    kotlinOptions {
-        jvmTarget = javaVersion.toString()
-    }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
         resources {
