@@ -6,10 +6,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.HorizontalDivider
@@ -50,7 +55,12 @@ private fun OssLicenseScreen(
         topBar = {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .windowInsetsPadding(
+                        WindowInsets.safeDrawing.only(
+                            WindowInsetsSides.Top + WindowInsetsSides.Horizontal
+                        )
+                    ),
             ) {
                 Row(
                     modifier = Modifier
@@ -61,7 +71,7 @@ private fun OssLicenseScreen(
                 ) {
                     Image(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                        contentDescription = null,
+                        contentDescription = stringResource(R.string.navigate_back),
                         colorFilter = ColorFilter.tint(
                             color = MaterialTheme.colorScheme.onBackground,
                         ),

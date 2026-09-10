@@ -27,4 +27,6 @@
     <string name="divide">÷</string>
     <string name="equal">=</string>
     <string name="open_source_license">オープンソースライセンス</string>
+    <string name="open_menu">メニューを開く</string>
+    <string name="navigate_back">戻る</string>
 </resources>

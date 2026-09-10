@@ -3,16 +3,25 @@ package io.github.emusute1212.calculator.ui.main
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
@@ -22,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -94,8 +104,13 @@ private fun CalculatorScreenHost(
             topBar = {
                 Image(
                     painter = painterResource(id = R.drawable.ic_menu_black_24dp),
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.open_menu),
                     modifier = Modifier
+                        .windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(
+                                WindowInsetsSides.Top + WindowInsetsSides.Horizontal
+                            )
+                        )
                         .padding(
                             all = 16.dp,
                         )
@@ -120,69 +135,79 @@ private fun CalculatorScreen(
     state: CalculatorScreenUiState,
     paddingValues: PaddingValues,
 ) {
-    Column(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
-            .background(color = MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.Bottom,
+            .padding(paddingValues),
     ) {
-        AutoSizeText(
-            text = state.calculationHistory,
-            style = MaterialTheme.typography.titleMedium.copy(
-                color = MaterialTheme.colorScheme.outlineVariant,
-            ),
-            textGravity = TextGravity.BottomEnd,
+        // Keep the fixed-size keypad reachable in narrow or short resizable windows.
+        // 352dp fits the keypad; 580dp also leaves 30dp for calculation history.
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(
-                    horizontal = 12.dp,
-                ),
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        AutoSizeText(
-            text = state.displayText,
-            style = MaterialTheme.typography.titleLarge.copy(
-                color = MaterialTheme.colorScheme.outline,
-            ),
-            maxLine = 1,
-            textGravity = TextGravity.BottomEnd,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(82.dp)
-                .padding(
-                    horizontal = 12.dp,
-                ),
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
-                .padding(
-                    top = 36.dp,
-                    start = 20.dp,
-                    end = 20.dp,
-                    bottom = 28.dp,
-                ),
-            horizontalArrangement = Arrangement.Center,
+                .verticalScroll(rememberScrollState())
+                .horizontalScroll(rememberScrollState())
+                .width(maxOf(this.maxWidth, 352.dp))
+                .height(maxOf(this.maxHeight, 580.dp))
+                .background(color = MaterialTheme.colorScheme.background),
+            verticalArrangement = Arrangement.Bottom,
         ) {
-            Column {
-                SpecialsButtonSection(
-                    state = state.specialsButtonSectionUiState
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                NumberButtonSection(
-                    state = state.numberButtonSectionUiState
+            AutoSizeText(
+                text = state.calculationHistory,
+                style = MaterialTheme.typography.titleMedium.copy(
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                ),
+                textGravity = TextGravity.BottomEnd,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(
+                        horizontal = 12.dp,
+                    ),
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            AutoSizeText(
+                text = state.displayText,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    color = MaterialTheme.colorScheme.outline,
+                ),
+                maxLine = 1,
+                textGravity = TextGravity.BottomEnd,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(82.dp)
+                    .padding(
+                        horizontal = 12.dp,
+                    ),
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    .padding(
+                        top = 36.dp,
+                        start = 20.dp,
+                        end = 20.dp,
+                        bottom = 28.dp,
+                    ),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Column {
+                    SpecialsButtonSection(
+                        state = state.specialsButtonSectionUiState
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    NumberButtonSection(
+                        state = state.numberButtonSectionUiState
+                    )
+                }
+                Spacer(modifier = Modifier.width(24.dp))
+                OperatorButtonSection(
+                    state = state.operatorButtonSectionUiState
                 )
             }
-            Spacer(modifier = Modifier.width(24.dp))
-            OperatorButtonSection(
-                state = state.operatorButtonSectionUiState
-            )
         }
     }
 }
